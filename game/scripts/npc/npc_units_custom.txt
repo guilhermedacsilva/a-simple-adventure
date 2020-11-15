@@ -1,0 +1,233 @@
+// Units File
+"DOTAUnits"
+{
+	"Version"	"1"
+
+	"npc_unit_delivery_goat"
+	{
+		// General
+		//----------------------------------------------------------------
+		"Model"						"models/courier/defense3_sheep/defense3_sheep.vmdl"
+		"BaseClass"					"npc_dota_creature"
+		"SoundSet"					"n_creep_Ranged"
+		"GameSoundsFile"			"soundevents/game_sounds_creeps.vsndevts"
+		"Level"						"1"
+		"ModelScale" 				"2"
+
+		"ArmorPhysical"				"0"
+    	"MagicalResistance"       "100"
+		"AttackCapabilities"		"DOTA_UNIT_CAP_NO_ATTACK"
+		"RingRadius"				"120"
+		"HealthBarOffset"			"170"
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
+		"MovementSpeed"				"130"
+		"StatusHealth"				"200"		// Base health.
+		"VisionDaytimeRange"		"450"		// Range of vision during day light.
+		"VisionNighttimeRange"		"450"		// Range of vision at night time.
+    	"BoundsHullName"      "DOTA_HULL_SIZE_HUGE"
+	}
+
+	"npc_unit_kobold_1"
+	{
+		"BaseClass"         "npc_dota_creature"
+		"Model"           "models/creeps/neutral_creeps/n_creep_kobold/kobold_c/n_creep_kobold_c.vmdl"
+		"SoundSet"          "n_creep_Melee"
+		"Level"           "1"
+		"ModelScale"                "1"
+
+		"AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageMin"     "7"
+		"AttackDamageMax"     "10"
+		"AttackRate"        "2"
+		"AttackAnimationPoint"    "0.38"
+		"AttackAcquisitionRange"  "9999"
+		"AttackRange"       "100"
+
+		"StatusHealth"        "60"
+
+		"RingRadius"              "40"
+		"HealthBarOffset"           "150"
+		"MovementCapabilities"    "DOTA_UNIT_CAP_MOVE_GROUND"
+		"MovementSpeed"       "250"
+		"MovementTurnRate"      "1.0"
+		"FollowRange"       "9999"
+		"VisionDaytimeRange"    "9999"
+		"VisionNighttimeRange"    "9999"
+	}
+
+	"npc_unit_kobold_2"
+	{
+		"BaseClass"         "npc_dota_creature"
+		"Model"           "models/creeps/neutral_creeps/n_creep_kobold/kobold_b/n_creep_kobold_b.vmdl"
+		"SoundSet"          "n_creep_Melee"
+		"Level"           "1"
+		"ModelScale"                "1"
+
+		"AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageMin"     "9"
+		"AttackDamageMax"     "15"
+		"AttackRate"        "2"
+		"AttackAnimationPoint"    "0.38"
+		"AttackAcquisitionRange"  "9999"
+		"AttackRange"       "100"
+
+		"StatusHealth"        "70"
+
+		"RingRadius"              "40"
+		"HealthBarOffset"           "150"
+		"MovementCapabilities"    "DOTA_UNIT_CAP_MOVE_GROUND"
+		"MovementSpeed"       "250"
+		"MovementTurnRate"      "1.0"
+		"FollowRange"       "9999"
+		"VisionDaytimeRange"    "9999"
+		"VisionNighttimeRange"    "9999"
+	}
+
+	"npc_unit_kobold_3"
+	{
+		"BaseClass"         "npc_dota_creature"
+		"Model"           "models/creeps/neutral_creeps/n_creep_kobold/kobold_a/n_creep_kobold_a.vmdl"
+		"SoundSet"          "n_creep_Melee"
+		"Level"           "1"
+		"ModelScale"                "1"
+
+		"AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageMin"     "10"
+		"AttackDamageMax"     "20"
+		"AttackRate"        "2"
+		"AttackAnimationPoint"    "0.38"
+		"AttackAcquisitionRange"  "9999"
+		"AttackRange"       "110"
+
+		"StatusHealth"        "100"
+
+		"RingRadius"              "50"
+		"HealthBarOffset"           "180"
+		"MovementCapabilities"    "DOTA_UNIT_CAP_MOVE_GROUND"
+		"MovementSpeed"       "250"
+		"MovementTurnRate"      "1.0"
+		"FollowRange"       "9999"
+		"VisionDaytimeRange"    "9999"
+		"VisionNighttimeRange"    "9999"
+	}
+
+	"npc_unit_gnoll"
+	{
+		"BaseClass"         "npc_dota_creature"
+		"Model"           "models/creeps/neutral_creeps/n_creep_gnoll/n_creep_gnoll.vmdl"
+		"SoundSet"          "n_creep_Melee"
+		"Level"           "1"
+		"ModelScale"                "1"
+
+		"AttackCapabilities"    "DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageMin"     "10"
+		"AttackDamageMax"     "20"
+		"AttackRate"        "2"
+		"AttackAnimationPoint"    "0.38"
+		"AttackAcquisitionRange"  "9999"
+		"AttackRange"       "300"
+	    "ProjectileModel"     "particles/neutral_fx/gnoll_base_attack.vpcf"
+	    "ProjectileSpeed"     "700"
+
+		"StatusHealth"        "100"
+
+		"RingRadius"              "50"
+		"HealthBarOffset"           "180"
+		"MovementCapabilities"    "DOTA_UNIT_CAP_MOVE_GROUND"
+		"MovementSpeed"       "250"
+		"MovementTurnRate"      "1.0"
+		"FollowRange"       "9999"
+		"VisionDaytimeRange"    "9999"
+		"VisionNighttimeRange"    "9999"
+	}
+
+	"npc_unit_wolf"
+	{
+		"BaseClass"         "npc_dota_creature"
+		"Model"           "models/creeps/neutral_creeps/n_creep_worg_small/n_creep_worg_small.vmdl"
+		"SoundSet"          "n_creep_Melee"
+		"Level"           "1"
+		"ModelScale"                "1"
+
+		"AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageMin"     "10"
+		"AttackDamageMax"     "20"
+		"AttackRate"        "2"
+		"AttackAnimationPoint"    "0.38"
+		"AttackAcquisitionRange"  "300"
+		"AttackRange"       "100"
+
+		"StatusHealth"        "100"
+
+		"RingRadius"              "50"
+		"HealthBarOffset"           "180"
+		"MovementCapabilities"    "DOTA_UNIT_CAP_MOVE_GROUND"
+		"MovementSpeed"       "250"
+		"MovementTurnRate"      "1.0"
+		"FollowRange"       "600"
+		"VisionDaytimeRange"    "9999"
+		"VisionNighttimeRange"    "9999"
+	}
+
+	"npc_unit_ogre"
+	{
+		"BaseClass"         "npc_dota_creature"
+		"Model"           "models/creeps/neutral_creeps/n_creep_ogre_lrg/n_creep_ogre_lrg.vmdl"
+		"SoundSet"          "n_creep_Melee"
+		"Level"           "1"
+		"ModelScale"                "1.2"
+
+        "Ability1"      "spell_immunity_datadriven"
+
+		"AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageMin"     "20"
+		"AttackDamageMax"     "30"
+		"AttackRate"        "2"
+		"AttackAnimationPoint"    "0.38"
+		"AttackAcquisitionRange"  "500"
+		"AttackRange"       "100"
+
+		"StatusHealth"        "200"
+
+		"RingRadius"              "60"
+		"HealthBarOffset"           "220"
+		"MovementCapabilities"    "DOTA_UNIT_CAP_MOVE_GROUND"
+		"MovementSpeed"       "250"
+		"MovementTurnRate"      "1.0"
+		"FollowRange"       "600"
+		"VisionDaytimeRange"    "9999"
+		"VisionNighttimeRange"    "9999"
+	}
+
+	"npc_unit_ogre_big"
+	{
+    	"vscripts"                  "ai/ogre_big.lua"
+		"BaseClass"         "npc_dota_creature"
+		"Model"           "models/creeps/neutral_creeps/n_creep_ogre_med/n_creep_ogre_med.vmdl"
+		"SoundSet"          "n_creep_Melee"
+		"Level"           "1"
+		"ModelScale"                "2"
+
+        "Ability1"      "ogre_big_smash_datadriven"
+
+		"AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageMin"     "35"
+		"AttackDamageMax"     "35"
+		"AttackRate"        "3"
+		"AttackAnimationPoint"    "0.38"
+		"AttackAcquisitionRange"  "500"
+		"AttackRange"       "150"
+
+		"StatusHealth"        "1000"
+
+		"RingRadius"              "125"
+		"HealthBarOffset"           "300"
+		"MovementCapabilities"    "DOTA_UNIT_CAP_MOVE_GROUND"
+		"MovementSpeed"       "250"
+		"MovementTurnRate"      "0.8"
+		"FollowRange"       "600"
+		"VisionDaytimeRange"    "9999"
+		"VisionNighttimeRange"    "9999"
+    	"BoundsHullName"      "DOTA_HULL_SIZE_HUGE"
+	}
+}

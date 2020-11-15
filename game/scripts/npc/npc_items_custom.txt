@@ -1,0 +1,302 @@
+"DOTAAbilities"
+{
+    "item_ward_observer"
+    {
+        "ItemCost"          "10"
+        "ItemPurchasable"   "0"
+    }
+
+    "item_tombstone"
+    {
+        // General
+        //-------------------------------------------------------------------------------------------------------------
+        "AbilityName"         "item_tombstone"
+        "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
+        "Model"             "models/props_gameplay/tombstoneb01.vmdl"
+        "PingOverrideText"        "DOTA_Chat_Tombstone_Pinged"
+        "precache"
+        {
+            "particle_folder" "particles/units/heroes/hero_morphling"
+        }
+
+        // Stats
+        //-------------------------------------------------------------------------------------------------------------
+        "AbilityCastRange"        "100"
+        "AbilityCastPoint"        "0.0"
+        "AbilityChannelTime"      "6.0"
+
+        // Item Info
+        //-------------------------------------------------------------------------------------------------------------
+        //"ItemCost"            "99999"
+        "ItemPurchasable"       "0"
+        "ItemShopTags"          "consumable"
+        "ItemQuality"         "consumable"
+        "ItemStackable"         "1"
+        "ItemShareability"        "ITEM_FULLY_SHAREABLE"
+        "ItemPermanent"         "0"
+        "ItemInitialCharges"      "1"
+        "ItemCastOnPickup"        "1"
+        "ItemKillable"          "0"
+    }
+
+    "item_flask_datadriven"
+    {
+        // General
+        //-------------------------------------------------------------------------------------------------------------
+        "BaseClass"                     "item_datadriven"
+        "ID"                            "1039"  //Valve's version of this item uses the ID "39".
+        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
+        "AbilityUnitTargetTeam"         "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+        "AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO"
+        "Model"                         "models/props_gameplay/salve.mdl"
+        "Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
+        "AbilityTextureName"            "item_flask"
+
+        "AbilityCastPoint"              "0"
+        "AbilityCooldown"               "15"
+        "AbilityManaCost"               "0"
+        "AbilityCastRange"              "100"
+
+        // Item Info
+        //-------------------------------------------------------------------------------------------------------------
+        "ItemCost"                      "50"
+        "ItemShopTags"                  "consumable"
+        "ItemQuality"                   "consumable"
+        "ItemAliases"                   "healing salve"
+        "ItemStackable"                 "1"
+        "ItemPermanent"                 "0"
+        "ItemInitialCharges"            "1"
+
+        "AbilitySpecial"
+        {
+            "01"
+            {
+                "var_type"              "FIELD_INTEGER"
+                "buff_duration"         "3"
+            }
+            "02"
+            {
+                "var_type"              "FIELD_INTEGER"
+                "total_health_regen"    "100"
+            }
+            "03"
+            {
+                "var_type"              "FIELD_FLOAT"
+                "health_per_second"     "33.3"
+            }
+        }
+
+        "OnSpellStart"
+        {
+            "ApplyModifier"
+            {
+                "Target"                "TARGET"
+                "ModifierName"          "modifier_item_flask_datadriven_active"
+            }
+
+            "FireSound"
+            {
+                "EffectName"            "DOTA_Item.HealingSalve.Activate"
+                "Target"                "TARGET"
+            }
+            "SpendCharge"
+            {}
+        }
+
+        "Modifiers"
+        {
+            "modifier_item_flask_datadriven_active"
+            {
+                "Duration"                  "%buff_duration"
+                "Passive"                   "0"
+                "IsHidden"                  "0"
+                "IsBuff"                    "1"
+                "IsDebuff"                  "0"
+                "IsPurgable"                "1"
+                "TextureName"               "item_flask"
+                "EffectName"                "particles/items_fx/healing_flask.vpcf"
+                "EffectAttachType"          "follow_origin"
+
+                "Properties"
+                {
+                    "MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT"   "%health_per_second"
+                }
+            }
+        }
+    }
+
+    "item_clarity_datadriven"
+    {
+        // General
+        //-------------------------------------------------------------------------------------------------------------
+        "BaseClass"                     "item_datadriven"
+        "ID"                            "1040"  //Valve's version of this item uses the ID "39".
+        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
+        "AbilityUnitTargetTeam"         "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+        "AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO"
+        "Model"                         "models/props_gameplay/clarity.mdl"
+        "Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
+        "AbilityTextureName"            "item_clarity"
+
+        "AbilityCastPoint"              "0"
+        "AbilityCooldown"               "15"
+        "AbilityManaCost"               "0"
+        "AbilityCastRange"              "100"
+
+        // Item Info
+        //-------------------------------------------------------------------------------------------------------------
+        "ItemCost"                      "50"
+        "ItemShopTags"                  "consumable"
+        "ItemQuality"                   "consumable"
+        "ItemAliases"                   "clarity"
+        "ItemStackable"                 "1"
+        "ItemPermanent"                 "0"
+        "ItemInitialCharges"            "1"
+
+        "AbilitySpecial"
+        {
+            "01"
+            {
+                "var_type"              "FIELD_INTEGER"
+                "buff_duration"         "6"
+            }
+            "02"
+            {
+                "var_type"              "FIELD_INTEGER"
+                "total_mana_regen"    "60"
+            }
+            "03"
+            {
+                "var_type"              "FIELD_FLOAT"
+                "mana_per_second"     "10"
+            }
+        }
+
+        "OnSpellStart"
+        {
+            "ApplyModifier"
+            {
+                "Target"                "TARGET"
+                "ModifierName"          "modifier_item_clarity_datadriven_active"
+            }
+
+            "FireSound"
+            {
+                "EffectName"            "DOTA_Item.ClarityPotion.Activate"
+                "Target"                "TARGET"
+            }
+            "SpendCharge"
+            {}
+        }
+
+        "Modifiers"
+        {
+            "modifier_item_clarity_datadriven_active"
+            {
+                "Duration"                  "%buff_duration"
+                "Passive"                   "0"
+                "IsHidden"                  "0"
+                "IsBuff"                    "1"
+                "IsDebuff"                  "0"
+                "IsPurgable"                "1"
+                "TextureName"               "item_clarity"
+                "EffectName"                "particles/items_fx/healing_clarity.vpcf"
+                "EffectAttachType"          "follow_origin"
+
+                "Properties"
+                {
+                    "MODIFIER_PROPERTY_MANA_REGEN_CONSTANT"   "%mana_per_second"
+                }
+            }
+        }
+    }
+
+
+    // ==================================================================
+    // ==================================================================
+    // ==================================================================
+    // ==================================================================
+    // WEAPONS
+    // ==================================================================
+    // ==================================================================
+    // ==================================================================
+    // ==================================================================
+
+    "item_claws_datadriven"
+    {
+        "BaseClass"                     "item_datadriven"
+        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+        "Model"                         "models/props_gameplay/red_box.vmdl"
+        "Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
+
+        "AbilityTextureName"            "item_blades_of_attack"
+        "ItemCost"                      "100"
+
+        "AbilitySpecial"
+        {
+            "01"
+            {
+                "var_type"              "FIELD_INTEGER"
+                "bonus_attack"        "5"
+            }
+        }
+        "Modifiers"
+        {
+            "modifier_item_claws_datadriven"
+            {
+                "Passive"           "1"
+                "IsHidden"          "1"
+                "Attributes"        "MODIFIER_ATTRIBUTE_MULTIPLE"
+                "Properties"
+                {
+                    "MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE"        "%bonus_attack"
+                }
+            }
+        }
+    }
+
+    // ==================================================================
+    // ==================================================================
+    // ==================================================================
+    // ==================================================================
+    // ARMORS
+    // ==================================================================
+    // ==================================================================
+    // ==================================================================
+    // ==================================================================
+
+    "item_wood_shield_datadriven"
+    {
+        "BaseClass"                     "item_datadriven"
+        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+        "Model"                         "models/props_gameplay/red_box.vmdl"
+        "Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
+
+        "AbilityTextureName"            "stout_shield"
+        "ItemCost"                      "100"
+
+        "AbilitySpecial"
+        {
+            "01"
+            {
+                "var_type"              "FIELD_INTEGER"
+                "bonus_armor"        "1"
+            }
+        }
+        "Modifiers"
+        {
+            "modifier_item_wood_shield_datadriven"
+            {
+                "Passive"           "1"
+                "IsHidden"          "1"
+                "Attributes"        "MODIFIER_ATTRIBUTE_MULTIPLE"
+                "Properties"
+                {
+                    "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"        "%bonus_armor"
+                }
+            }
+        }
+    }
+
+
+}

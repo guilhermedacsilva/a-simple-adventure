@@ -1,0 +1,70 @@
+"dota_shops"
+{
+    "consumables"
+    {
+        "item"    "item_flask_datadriven"
+        "item"    "item_clarity_datadriven"
+    }
+
+    "attributes" // up right
+    {
+
+    }
+
+    "weapons_armor" // mid left
+    {
+        "item"    "item_claws_datadriven"
+    }
+
+    "misc" // mid right
+    {
+        "item"    "item_wood_shield_datadriven"
+    }
+
+    // ==========================================================================
+    // advanced --- top left
+    "basics"
+    {
+    }
+
+    // advanced --- top right
+    "support"
+    {
+    }
+
+    // advanced --- mid left
+    "magics"
+    {
+    }
+
+    // advanced --- mid right
+    "defense"
+    {
+    }
+
+    // advanced --- bot left
+    "weapons"
+    {
+    }
+
+    // advanced --- bot right
+    "artifacts"
+    {
+    }
+
+    "sideshop1"
+    {
+    }
+
+    "sideshop2"
+    {
+    }
+
+    "secretshop" // bot left
+    {
+    }
+
+    "pregame"
+    {
+    }
+}

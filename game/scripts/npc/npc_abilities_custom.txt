@@ -1,0 +1,684 @@
+// Dota Heroes File
+"DOTAAbilities"
+{
+	"Version"		"1"
+
+	//-------------------------------------------------------------------------------------------------------------
+	// MARS
+	//-------------------------------------------------------------------------------------------------------------
+	"mars_warcry_datadriven"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"				"ability_datadriven"
+		"MaxLevel" 						"4"
+		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"AbilityTextureName"	"mars_arena_of_blood"
+
+		// Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"soundfile"			"soundevents/game_sounds_heroes/game_sounds_sven.vsndevts"
+			"particle"			"particles/units/heroes/hero_sven/sven_spell_warcry.vpcf"
+			"particle"			"particles/units/heroes/hero_sven/sven_warcry_buff.vpcf"
+		}
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+
+		// Time
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"30"
+		"AbilityDuration"				"7 8 9 10"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"50 70 90 110"
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"warcry_attack"	"5 10 15 20" // %
+			}
+			"02"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"warcry_armor"		"1 2 3 4"
+			}
+			"03"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"warcry_movespeed"	"5 10 15 20" // %
+			}
+			"04"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"warcry_radius"		"900"
+			}
+		}
+
+		"OnSpellStart"
+		{
+			"ActOnTargets"
+			{
+				"Target"
+				{
+					"Center" "CASTER"
+	                "Radius" "%warcry_radius"
+	                "Teams" "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+	                "Types" "DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
+				}
+
+				"Action"
+				{
+					"ApplyModifier"
+					{
+						"ModifierName"	"modifier_warcry_datadriven"
+						"Target"		"TARGET"
+					}
+				}
+			}
+
+			"FireSound"
+			{
+				"EffectName"	"Hero_Sven.WarCry"
+				"Target"		"CASTER"
+			}
+
+			"FireEffect"
+			{
+				"EffectName"	"particles/units/heroes/hero_sven/sven_spell_warcry.vpcf"
+				"EffectAttachType"	"follow_origin"
+				"Target"		"CASTER"
+			}
+		}
+
+		"Modifiers"
+		{
+			"modifier_warcry_datadriven"
+			{
+				"IsBuff"	"1"
+				"Duration"	"%AbilityDuration"
+
+				"EffectName"	"particles/units/heroes/hero_sven/sven_warcry_buff.vpcf"
+				"EffectAttachType"	"follow_origin"
+
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"	"%warcry_movespeed"
+					"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"		"%warcry_armor"
+					"MODIFIER_PROPERTY_BASEDAMAGEOUTGOING_PERCENTAGE"		"%warcry_attack"
+				}
+			}
+		}
+	}
+
+	"mars_armor_datadriven"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"				"ability_datadriven"
+		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityTextureName"	"mars_bulwark"
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"bonus_armor"				"1 2 3 4"
+			}
+		}
+		"Modifiers"
+		{
+			"modifier_dragon_blood_datadriven"
+			{
+				"Passive"	"1"
+				"IsHidden"	"1"
+
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"	"%bonus_armor"
+				}
+			}
+		}
+	}
+
+	"mars_battle_victory_datadriven"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"				"ability_datadriven"
+		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+		"AbilityTextureName"	"legion_commander_duel_alt1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"health_gain"				"1.5 3.0 4.5 6.0"
+			}
+		}
+		"Modifiers"
+		{
+			"modifier_mars_battle_victory_datadriven"
+			{
+				"Passive"	"1"
+				"IsHidden"	"1"
+			    "Aura" "modifier_mars_battle_victory_enemy_datadriven"
+			    "Aura_Radius" "1000"
+			    "Aura_Teams" "DOTA_UNIT_TARGET_TEAM_ENEMY"
+			    "Aura_Types" "DOTA_UNIT_TARGET_ALL"
+			}
+			"modifier_mars_battle_victory_enemy_datadriven"
+			{
+				"Passive"	"1"
+				"IsHidden"	"1"
+    			"IsPurgable" "0"
+				"OnDeath"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"ability/mars_battle_victory.lua"
+						"Function"		"MarsBattleVictoryOnDeath"
+					}
+				}
+			}
+		}
+
+	}
+
+	//-------------------------------------------------------------------------------------------------------------
+	// WINDRUNNER / WINDRANGER
+	//-------------------------------------------------------------------------------------------------------------
+	"wind_arrow_shower_datadriven"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"				"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_POINT"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+		"AbilityTextureName"			"legion_commander_overwhelming_odds"
+		"AOERadius"						"%radius"
+
+		// Time
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"10"
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"550"
+		"AbilityCastPoint"				"0.4"
+		"AbilityManaCost"				"20"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage"				"30 40 50 60"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"150 200 250 300"
+			}
+		}
+
+
+		"OnSpellStart"
+		{
+			"ActOnTargets"
+			{
+				"Target"
+	            {
+	                "Center" "POINT"
+	                "Radius" "%radius"
+	                "Teams" "DOTA_UNIT_TARGET_TEAM_ENEMY"
+	                "Types" "DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
+	            }
+
+	            "Action"
+	            {
+	            	"Damage"
+	            	{
+	            		"Target"	"TARGET"
+	            		"Type"		"DAMAGE_TYPE_MAGICAL"
+	            		"Damage"	"%damage"
+	            	}
+	            }
+			}
+
+		 	"FireSound"
+			{
+				"EffectName"	"Hero_LegionCommander.Overwhelming.Hero"
+				"Target"		"POINT"
+			}
+
+			"FireEffect"
+			{
+				"EffectName"	"particles/units/heroes/hero_legion_commander/legion_commander_odds.vpcf"
+				"EffectAttachType"	"start_at_customorigin"
+				"TargetPoint"		"POINT"
+
+				"ControlPoints"
+	            {
+	            	"00"	"POINT"
+	            	"04"	"%radius 0 0"
+	            }
+			}
+		}
+	}
+
+	"wind_attack_speed_datadriven"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"				"ability_datadriven"
+		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityTextureName"	"windrunner_focusfire"
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"bonus_attack_speed"				"10 20 30 40"
+			}
+		}
+
+		"Modifiers"
+		{
+			"modifier_wind_attack_speed_datadriven"
+			{
+				"Passive"	"1"
+				"IsHidden"	"1"
+
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"	"%bonus_attack_speed"
+				}
+			}
+		}
+	}
+
+
+	//-------------------------------------------------------------------------------------------------------------
+	// LINA
+	//-------------------------------------------------------------------------------------------------------------
+	"lina_dragon_slave_datadriven"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"				"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_POINT"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityTextureName"			"lina_dragon_slave"
+
+		// Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"soundfile"			"soundevents/game_sounds_heroes/game_sounds_lina.vsndevts"
+			"particle"			"particles/units/heroes/hero_lina/lina_spell_dragon_slave.vpcf"
+		}
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"500"
+		"AbilityCastPoint"				"0.45"
+
+		// Time
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"6.5"
+		"AbilityDuration"				"5" // "0.6875"
+
+		// Damage.
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityDamage"					"30 60 90 120"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"25"
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"dragon_slave_speed"		"1200"
+			}
+
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"dragon_slave_width_initial"	"275"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"dragon_slave_width_end"		"200"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"dragon_slave_distance"			"500"
+			}
+			"05"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"dmg_reduction_pct"			"-5 -10 -15 -20"
+			}
+		}
+
+		"OnSpellStart"
+		{
+			"LinearProjectile"
+			{
+				"Target"      "POINT"
+			    "EffectName"  "particles/units/heroes/hero_lina/lina_spell_dragon_slave.vpcf"
+			    "MoveSpeed"   "%dragon_slave_speed"
+			    "StartRadius"   "%dragon_slave_width_initial"
+			    "StartPosition" "attach_origin"
+			    "EndRadius"     "%dragon_slave_width_end"
+			    "FixedDistance" "%dragon_slave_distance"
+			    "TargetTeams"   "DOTA_UNIT_TARGET_TEAM_ENEMY"
+			    "TargetTypes"   "DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
+			    "TargetFlags"   "DOTA_UNIT_TARGET_FLAG_NONE"
+			    "HasFrontalCone"    "1"
+			    "ProvidesVision" "1"
+			}
+
+			"FireSound"
+			{
+				"EffectName"	"Hero_Lina.DragonSlave"
+				"Target"		"CASTER"
+			}
+		}
+
+		"OnProjectileHitUnit"
+		{
+			"DeleteOnHit"	"0"
+			"Damage"
+			{
+				"Target"	"TARGET"
+				"Type"		"DAMAGE_TYPE_MAGICAL"
+				"Damage"	"%AbilityDamage"
+			}
+
+			"ApplyModifier"
+			{
+				"ModifierName"	"modifier_lina_dragon_slave_datadriven"
+				"Target"		"TARGET"
+			}
+		}
+
+		"Modifiers"
+		{
+			"modifier_lina_dragon_slave_datadriven"
+			{
+				"IsDebuff"	"1"
+				"Duration"	"%AbilityDuration"
+
+				//"EffectName"	"particles/units/heroes/hero_sven/sven_warcry_buff.vpcf"
+				//"EffectAttachType"	"follow_origin"
+
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_BASEDAMAGEOUTGOING_PERCENTAGE"	"%dmg_reduction_pct"
+				}
+			}
+		}
+
+	}
+
+	"lina_light_strike_array_datadriven"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"				"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityTextureName"			"lina_light_strike_array"
+
+		"AbilityCastRange"				"500"
+		"AbilityCastPoint"				"0.45"
+		"AOERadius"						"%light_strike_array_aoe"
+
+		// Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"soundfile"			"soundevents/game_sounds_heroes/game_sounds_lina.vsndevts"
+			"particle"			"particles/units/heroes/hero_lina/lina_spell_light_strike_array.vpcf"
+			"particle"			"particles/units/heroes/hero_lina/lina_spell_light_strike_array_ray_team.vpcf"
+			"particle"			"particles/generic_gameplay/generic_stunned.vpcf"
+		}
+
+		// Time
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"12"
+		"AbilityDuration"				"2.0 2.25 2.5 2.75"
+
+		// Damage.
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityDamage"					"40 80 120 160"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"30 50 70 90"
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"light_strike_array_aoe"	"80 130 180 230"
+			}
+			"02"
+			{
+				"var_type"						"FIELD_FLOAT"
+				"light_strike_array_delay_time"	"0.5"
+			}
+			"03"
+			{
+				"var_type"						"FIELD_FLOAT"
+				"light_strike_array_stun_duration"	"1.75 2.0 2.25 2.5"
+			}
+		}
+
+		"OnSpellStart"
+		{
+			"FireSound"
+			{
+				"EffectName"	"Ability.PreLightStrikeArray"
+				"Target"		"CASTER"
+			}
+
+			"FireEffect"
+			{
+				"EffectName"	"particles/units/heroes/hero_lina/lina_spell_light_strike_array_ray_team.vpcf"
+				"EffectAttachType"	"start_at_customorigin"
+				"TargetPoint"		"POINT"
+
+				"ControlPoints"
+	            {
+	            	"01"	"%light_strike_array_aoe 0 0"
+	            	"03"	"0 0 0"
+	            }
+			}
+
+			"DelayedAction"
+			{
+				"Delay"		"%light_strike_array_delay_time"
+
+				"Action"
+				{
+					"FireSound"
+					{
+						"EffectName"	"Ability.LightStrikeArray"
+						"Target"		"CASTER"
+					}
+
+					"FireEffect"
+					{
+						"EffectName"	"particles/units/heroes/hero_lina/lina_spell_light_strike_array.vpcf"
+						"EffectAttachType"	"start_at_customorigin"
+						"TargetPoint"		"POINT"
+
+						"ControlPoints"
+			            {
+			            	"00"	"POINT"
+			            	"01"	"%light_strike_array_aoe 0 0"
+			            	"03"	"0 0 0"
+			            }
+					}
+
+					"ActOnTargets"
+					{
+						"Target"
+			            {
+			                "Center" "POINT"
+			                "Radius" "%light_strike_array_aoe"
+			                "Teams" "DOTA_UNIT_TARGET_TEAM_ENEMY"
+			                "Types" "DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
+			            }
+
+			            "Action"
+			            {
+			            	"Damage"
+			            	{
+			            		"Target"	"TARGET"
+			            		"Type"		"DAMAGE_TYPE_MAGICAL"
+			            		"Damage"	"%AbilityDamage"
+			            	}
+
+			            	"ApplyModifier"
+			            	{
+			            		"ModifierName"	"modifier_light_strike_array_datadriven"
+			            		"Target"		"TARGET"
+			            		"Duration"		"%light_strike_array_stun_duration"
+			            	}
+			            }
+					}
+				}
+			}
+		}
+
+		"Modifiers"
+		{
+			"modifier_light_strike_array_datadriven"
+			{
+				"IsDebuff"	"1"
+				"OverrideAnimation"	"ACT_DOTA_DISABLED"
+
+				"EffectName"	"particles/generic_gameplay/generic_stunned.vpcf"
+				"EffectAttachType"	"follow_overhead"
+
+				"States"
+				{
+					"MODIFIER_STATE_STUNNED"	"MODIFIER_STATE_VALUE_ENABLED"
+				}
+			}
+		}
+	}
+
+
+	//-------------------------------------------------------------------------------------------------------------
+	// CREEPS
+	//-------------------------------------------------------------------------------------------------------------
+
+	"spell_immunity_datadriven"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"				"ability_datadriven"
+		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityTextureName"	"neutral_spell_immunity"
+
+		"Modifiers"
+		{
+			"modifier_spell_immunity_datadriven"
+			{
+				"Passive"	"1"
+				"IsHidden"	"1"
+
+				"States"
+				{
+					"MODIFIER_STATE_MAGIC_IMMUNE"	"MODIFIER_STATE_VALUE_ENABLED"
+				}
+			}
+		}
+	}
+
+	"ogre_big_smash_datadriven"
+	{
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+		"AbilityTextureName"			"black_dragon_splash_attack"
+
+		"AbilityCastPoint"				"1.5"
+		"AbilityCastRange"				"400"
+		"AbilityCooldown"				"8"
+		"AbilityCastAnimation" 			"ACT_DOTA_CAST_ABILITY_1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"radius"					"255"
+			}
+		}
+
+		"OnSpellStart"
+		{
+			"ActOnTargets"
+			{
+				"Target"
+				{
+					"Center"  	"POINT"
+					"Radius" 	"%radius"
+					"Teams" 	"DOTA_UNIT_TARGET_TEAM_ENEMY"
+					"Types" 	"DOTA_UNIT_TARGET_HERO"
+				}
+
+				"Action"
+				{
+					"Damage"
+					{
+						"Target"	"TARGET"
+						"Damage"	"1000"
+						"Type"		"DAMAGE_TYPE_PHYSICAL"
+					}
+				}
+			}
+		}
+
+	}
+
+}
