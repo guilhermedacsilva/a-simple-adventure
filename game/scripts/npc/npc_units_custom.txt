@@ -230,4 +230,32 @@
 		"VisionNighttimeRange"    "9999"
     	"BoundsHullName"      "DOTA_HULL_SIZE_HUGE"
 	}
+
+	"npc_unit_fire_elemental1"
+	{
+		"BaseClass"         "npc_dota_creature"
+		"Model"           "models/heroes/invoker/forge_spirit.vmdl"
+		"SoundSet"          "n_creep_Melee"
+		"Level"           "1"
+		"ModelScale"                "1.2"
+
+        "Ability1"      "fire_elemental_aura_datadriven1"
+
+		"AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageMin"     "5"
+		"AttackDamageMax"     "5"
+		"AttackRate"        "2"
+		"AttackAnimationPoint"    "0.38"
+		"AttackRange"       "100"
+
+		"StatusHealth"        "125"
+
+		"RingRadius"              "40"
+		"HealthBarOffset"           "150"
+		"MovementCapabilities"    "DOTA_UNIT_CAP_MOVE_GROUND"
+		"MovementSpeed"       "300"
+		"MovementTurnRate"      "1.0"
+        "VisionDaytimeRange"        "550"
+        "VisionNighttimeRange"      "450"
+	}
 }

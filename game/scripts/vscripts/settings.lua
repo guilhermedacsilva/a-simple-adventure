@@ -1,4 +1,4 @@
-DEBUG_HEROES = true
+DEBUG_HEROES = false
 
 if DEBUG_HEROES then
     DEBUG_QNT_HEROES = 3

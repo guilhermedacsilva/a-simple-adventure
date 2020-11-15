@@ -162,6 +162,7 @@
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
 		"AbilityTextureName"	"legion_commander_duel_alt1"
+		"AbilityCastRange"				"1000"
 
 		"AbilitySpecial"
 		{
@@ -184,7 +185,6 @@
 			}
 			"modifier_mars_battle_victory_enemy_datadriven"
 			{
-				"Passive"	"1"
 				"IsHidden"	"1"
     			"IsPurgable" "0"
 				"OnDeath"
@@ -312,6 +312,124 @@
 				"Properties"
 				{
 					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"	"%bonus_attack_speed"
+				}
+			}
+		}
+	}
+
+	"wind_first_aid_kit_datadriven"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"				"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+		"AbilityTextureName"			"roshan_halloween_candy"
+
+		"AbilityCooldown"				"20"
+		"AbilityCastRange"				"300"
+		"AbilityCastPoint"				"0.4"
+		"AbilityManaCost"				"50 75 100 125"
+		"AbilityChannelTime"			"4"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"heal"				"3 6 9 12" // ticks 0.2 seconds
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"heal_total"				"60 120 180 240"
+			}
+		}
+
+		"OnSpellStart"
+		{
+			"FireSound"
+			{
+				"EffectName"	"DOTA_Item.HealingSalve.Activate"
+				"Target"		"TARGET"
+			}
+
+			"ApplyModifier"
+			{
+				"ModifierName"	"modifier_wind_first_aid_kit_target_datadriven"
+				"Target"		"TARGET"
+			}
+
+			"ApplyModifier"
+			{
+				"ModifierName"	"modifier_wind_first_aid_kit_caster_datadriven"
+				"Target" 		"CASTER"
+			}
+		}
+
+		"OnChannelInterrupted"
+		{
+			"RemoveModifier"
+			{
+				"ModifierName"	"modifier_wind_first_aid_kit_target_datadriven"
+				"Target"		"TARGET"
+			}
+			"RemoveModifier"
+			{
+				"ModifierName"	"modifier_wind_first_aid_kit_caster_datadriven"
+				"Target"		"CASTER"
+			}
+		}
+
+		"OnChannelFinish"
+		{
+			"RemoveModifier"
+			{
+				"ModifierName"	"modifier_wind_first_aid_kit_target_datadriven"
+				"Target"		"TARGET"
+			}
+			"RemoveModifier"
+			{
+				"ModifierName"	"modifier_wind_first_aid_kit_caster_datadriven"
+				"Target"		"CASTER"
+			}
+		}
+
+		"Modifiers"
+		{
+			"modifier_wind_first_aid_kit_caster_datadriven"
+			{
+				"IsHidden"	"1"
+
+				"States"
+				{
+					"MODIFIER_STATE_LOW_ATTACK_PRIORITY"	"MODIFIER_STATE_VALUE_ENABLED"
+				}
+			}
+			"modifier_wind_first_aid_kit_target_datadriven"
+			{
+            	"IsBuff" "1"
+
+				"ThinkInterval"	"0.2"
+				"OnIntervalThink"
+				{
+					"Heal"
+					{
+						"Target"        "TARGET"
+						"HealAmount"	"%heal"
+					}
+				}
+
+				"OnCreated"
+				{
+					"AttachEffect"
+					{
+						"EffectName"        "particles/econ/courier/courier_babyroshan_winter18/courier_babyroshan_winter18_ambient_sparks.vpcf"
+						"EffectAttachType"  "follow_overhead"
+						"Target"            "TARGET"
+					}
 				}
 			}
 		}
@@ -606,6 +724,100 @@
 		}
 	}
 
+	"lina_summon_fire_elemental_datadriven"
+	{
+		"BaseClass"       "ability_datadriven"
+		"AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityTextureName"      "invoker_forge_spirit"
+
+		"AbilityCastPoint"        "0.3"
+		"AbilityCooldown"       "30"
+		"AbilityManaCost"       "50 100 150 200"
+		"AbilityDuration"		"120"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"unit1"				"1 0 0 0"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"unit2"				"0 1 0 0"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"unit3"				"0 0 1 0"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"unit4"				"0 0 0 1"
+			}
+			"05"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"hp"				"125 250 375 500"
+			}
+			"06"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"damage"				"5 10 15 20"
+			}
+		}
+
+		"OnSpellStart"
+		{
+			"SpawnUnit"
+			{
+				"UnitName"    "npc_unit_fire_elemental1"
+				"Target"	"CASTER"
+				"Duration"  "%AbilityDuration"
+				"UnitCount" "%unit1"
+				"UnitLimit" "1"
+				"GrantsGold"  "0"
+				"GrantsXP"    "0"
+				"SpawnRadius" "200"
+			}
+			"SpawnUnit"
+			{
+				"UnitName"    "npc_unit_fire_elemental2"
+				"Target"	"CASTER"
+				"Duration"  "%AbilityDuration"
+				"UnitCount" "%unit2"
+				"UnitLimit" "1"
+				"GrantsGold"  "0"
+				"GrantsXP"    "0"
+				"SpawnRadius" "200"
+			}
+			"SpawnUnit"
+			{
+				"UnitName"    "npc_unit_fire_elemental3"
+				"Target"	"CASTER"
+				"Duration"  "%AbilityDuration"
+				"UnitCount" "%unit3"
+				"UnitLimit" "1"
+				"GrantsGold"  "0"
+				"GrantsXP"    "0"
+				"SpawnRadius" "200"
+			}
+			"SpawnUnit"
+			{
+				"UnitName"    "npc_unit_fire_elemental4"
+				"Target"	"CASTER"
+				"Duration"  "%AbilityDuration"
+				"UnitCount" "%unit4"
+				"UnitLimit" "1"
+				"GrantsGold"  "0"
+				"GrantsXP"    "0"
+				"SpawnRadius" "200"
+			}
+		}
+	}
+
 
 	//-------------------------------------------------------------------------------------------------------------
 	// CREEPS
@@ -678,7 +890,62 @@
 				}
 			}
 		}
+	}
 
+	"fire_elemental_aura_datadriven1"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"				"ability_datadriven"
+		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityTextureName"	"invoker_exort"
+
+		"AOERadius"						"350"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"damage"					"5"
+			}
+		}
+
+		"Modifiers"
+		{
+			"modifier_fire_elemental_aura_datadriven1"
+			{
+				"Passive"	"1"
+				"IsHidden"	"1"
+			    "Aura" "modifier_fire_elemental_aura_damage_datadriven1"
+			    "Aura_Radius" "350"
+			    "Aura_Teams" "DOTA_UNIT_TARGET_TEAM_ENEMY"
+			    "Aura_Types" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+			}
+			"modifier_fire_elemental_aura_damage_datadriven1"
+			{
+				"IsDebuff"	"1"
+				"IsPurgable" "0"
+
+				"EffectName"	"particles/battlepass/healing_fire_torch_glow.vpcf"
+				"EffectAttachType"	"follow_overhead"
+
+				"ThinkInterval"	"1.0"
+				"OnIntervalThink"
+				{
+					"Damage"
+					{
+						"Target"		"TARGET"
+						"Type"			"DAMAGE_TYPE_MAGICAL"
+						"Damage"		"%damage"
+					}
+				}
+			}
+		}
 	}
 
 }

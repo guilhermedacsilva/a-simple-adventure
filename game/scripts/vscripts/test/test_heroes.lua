@@ -12,14 +12,14 @@ heroItems["0"] = {
 
 hero = CreateHeroForPlayer("npc_dota_hero_windrunner", hPlayer)
 DEBUG_HEROES_LIST["1"] = hero
-heroAbilities["1"] = {0,1,0}
+heroAbilities["1"] = {2,1,0}
 heroItems["1"] = {
     { ["name"] = "item_claws_datadriven", ["cost"] = 100}
 }
 
 hero = CreateHeroForPlayer("npc_dota_hero_lina", hPlayer)
 DEBUG_HEROES_LIST["2"] = hero
-heroAbilities["2"] = {0,1,0}
+heroAbilities["2"] = {2,1,0}
 heroItems["2"] = {
     { ["name"] = "item_claws_datadriven", ["cost"] = 100}
 }

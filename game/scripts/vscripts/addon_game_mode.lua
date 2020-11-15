@@ -35,6 +35,8 @@ function Precache( context )
   PrecacheModel("particles/neutral_fx/gnoll_base_attack.vpcf", context)
   PrecacheModel("particles/danger_circle.vpcf", context)
   PrecacheModel("particles/generic_gameplay/generic_lifesteal.vpcf", context)
+  PrecacheModel("particles/econ/courier/courier_babyroshan_winter18/courier_babyroshan_winter18_ambient_sparks.vpcf", context)
+  PrecacheModel("particles/battlepass/healing_fire_torch_glow.vpcf", context)
 
   -- Sounds can precached here like anything else
   --PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_legion_commander.vsndevts", context)
