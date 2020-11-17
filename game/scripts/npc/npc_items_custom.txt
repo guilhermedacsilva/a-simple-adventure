@@ -1,11 +1,5 @@
 "DOTAAbilities"
 {
-    "item_ward_observer"
-    {
-        "ItemCost"          "10"
-        "ItemPurchasable"   "0"
-    }
-
     "item_tombstone"
     {
         // General
@@ -44,11 +38,11 @@
         // General
         //-------------------------------------------------------------------------------------------------------------
         "BaseClass"                     "item_datadriven"
-        "ID"                            "1039"  //Valve's version of this item uses the ID "39".
+        //"ID"                            "1039"  //Valve's version of this item uses the ID "39".
         "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
         "AbilityUnitTargetTeam"         "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
         "AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO"
-        "Model"                         "models/props_gameplay/salve.mdl"
+        "Model"                         "models/props_gameplay/red_box.vmdl"
         "Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
         "AbilityTextureName"            "item_flask"
 
@@ -62,10 +56,7 @@
         "ItemCost"                      "50"
         "ItemShopTags"                  "consumable"
         "ItemQuality"                   "consumable"
-        "ItemAliases"                   "healing salve"
-        "ItemStackable"                 "1"
-        "ItemPermanent"                 "0"
-        "ItemInitialCharges"            "1"
+        "ItemAliases"                   "flask"
 
         "AbilitySpecial"
         {
@@ -130,11 +121,11 @@
         // General
         //-------------------------------------------------------------------------------------------------------------
         "BaseClass"                     "item_datadriven"
-        "ID"                            "1040"  //Valve's version of this item uses the ID "39".
+        //"ID"                            "1040"  //Valve's version of this item uses the ID "39".
         "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
         "AbilityUnitTargetTeam"         "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
         "AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO"
-        "Model"                         "models/props_gameplay/clarity.mdl"
+        "Model"                         "models/props_gameplay/red_box.vmdl"
         "Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
         "AbilityTextureName"            "item_clarity"
 
@@ -148,10 +139,7 @@
         "ItemCost"                      "50"
         "ItemShopTags"                  "consumable"
         "ItemQuality"                   "consumable"
-        "ItemAliases"                   "clarity"
-        "ItemStackable"                 "1"
-        "ItemPermanent"                 "0"
-        "ItemInitialCharges"            "1"
+        "ItemAliases"                   "clarity_pot"
 
         "AbilitySpecial"
         {

@@ -6,6 +6,7 @@ if SimpleAdventure == nil then
 end
 
 function SimpleAdventure:Init()
+    self.shopLevel = 0
     if DEBUG_HEROES then
         if DEBUG_START_SCENE == 1 then
             Floresta1:Init()
@@ -13,6 +14,12 @@ function SimpleAdventure:Init()
             Floresta2:DebugScene()
         end
     else
+        for nPlayerID = 0, DOTA_MAX_TEAM_PLAYERS-1 do
+            if PlayerResource:GetTeam( nPlayerID ) == DOTA_TEAM_GOODGUYS and PlayerResource:HasSelectedHero( nPlayerID ) then
+                local hero = PlayerResource:GetSelectedHeroEntity( nPlayerID )
+                table.insert(HEROES, hero)
+            end
+        end
         Floresta1:Init()
     end
 end
@@ -54,6 +61,7 @@ function SimpleAdventure:LevelUp(gold)
         hero:AddExperience(100, 0, false, false)
     end
     self:RefreshAllUnits()
+    EmitGlobalSound("Adventure.Coins")
 end
 
 function SimpleAdventure:RefreshAllUnits()

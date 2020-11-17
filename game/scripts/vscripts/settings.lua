@@ -1,11 +1,11 @@
-DEBUG_HEROES = false
+DEBUG_HEROES = true
 
 if DEBUG_HEROES then
     DEBUG_QNT_HEROES = 3
     FORCE_PICKED_HERO = "npc_dota_hero_mars"
     STARTING_GOLD = 99999
     DEBUG_HEROES_LIST = {}
-    DEBUG_START_SCENE = 2
+    DEBUG_START_SCENE = 1
 else
     STARTING_GOLD = 0
 end
@@ -100,8 +100,8 @@ ENABLED_RUNES[DOTA_RUNE_ARCANE] = true
 
 
 MAX_NUMBER_OF_TEAMS = 1                -- How many potential teams can be in this game mode?
-USE_CUSTOM_TEAM_COLORS = false           -- Should we use custom team colors?
-USE_CUSTOM_TEAM_COLORS_FOR_PLAYERS = false          -- Should we use custom team colors to color the players/minimap?
+USE_CUSTOM_TEAM_COLORS = true           -- Should we use custom team colors?
+USE_CUSTOM_TEAM_COLORS_FOR_PLAYERS = true          -- Should we use custom team colors to color the players/minimap?
 
 TEAM_COLORS = {}                        -- If USE_CUSTOM_TEAM_COLORS is set, use these colors.
 TEAM_COLORS[DOTA_TEAM_GOODGUYS] = { 61, 210, 150 }  --    Teal
@@ -116,7 +116,7 @@ TEAM_COLORS[DOTA_TEAM_CUSTOM_7] = { 199, 228, 13 }  --    Olive
 TEAM_COLORS[DOTA_TEAM_CUSTOM_8] = { 140, 42, 244 }  --    Purple
 
 
-USE_AUTOMATIC_PLAYERS_PER_TEAM = false   -- Should we set the number of players to 10 / MAX_NUMBER_OF_TEAMS?
+USE_AUTOMATIC_PLAYERS_PER_TEAM = true   -- Should we set the number of players to 10 / MAX_NUMBER_OF_TEAMS?
 
 CUSTOM_TEAM_PLAYER_COUNT = {}           -- If we're not automatically setting the number of players per team, use this table
 CUSTOM_TEAM_PLAYER_COUNT[DOTA_TEAM_GOODGUYS] = 5

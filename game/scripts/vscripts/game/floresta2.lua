@@ -21,7 +21,7 @@ function Floresta2:Init()
 end
 
 function Floresta2:MoveGoat()
-    local enemiesNear = SimpleAdventure:EnemiesInRange(self.goat:GetAbsOrigin(), 600)
+    local enemiesNear = SimpleAdventure:EnemiesInRange(self.goat:GetAbsOrigin(), 1000)
 
     if self.goat == nil or self.goat == none or not self.goat:IsAlive() then
         GameRules:SetGameWinner(DOTA_TEAM_BADGUYS)

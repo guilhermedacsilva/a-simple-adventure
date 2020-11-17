@@ -28,7 +28,7 @@ function Floresta1:GiveStartItems()
 end
 
 function Floresta1:MoveGoat()
-    local enemiesNear = SimpleAdventure:EnemiesInRange(self.goat:GetAbsOrigin(), 600)
+    local enemiesNear = SimpleAdventure:EnemiesInRange(self.goat:GetAbsOrigin(), 1000)
 
     if self.goat == nil or self.goat == none or not self.goat:IsAlive() then
         GameRules:SetGameWinner(DOTA_TEAM_BADGUYS)
@@ -72,8 +72,11 @@ end
 
 function Floresta1:SpawnBandits()
     if self.goatTargetNum == 1 then
-        SimpleAdventure:CreateEnemy("npc_unit_gnoll", self.spawnerTop1, 2)
+        SimpleAdventure:CreateEnemy("npc_unit_kobold_1", self.spawnerTop1, 2)
         SimpleAdventure:CreateEnemy("npc_unit_kobold_1", self.spawnerBot1, 2)
+
+        CreateItemOnPositionSync(self.spawnerTop1, CreateItem("item_clarity_datadriven", nil, nil))
+        CreateItemOnPositionSync(self.spawnerBot1, CreateItem("item_clarity_datadriven", nil, nil))
     elseif self.goatTargetNum == 2 then
         SimpleAdventure:CreateEnemy("npc_unit_kobold_1", self.spawnerTop1, 1)
         SimpleAdventure:CreateEnemy("npc_unit_kobold_1", self.spawnerBot1, 1)

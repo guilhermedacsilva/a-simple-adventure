@@ -5,7 +5,7 @@ local heroAbilities = {}
 
 local hero = CreateHeroForPlayer("npc_dota_hero_mars", hPlayer)
 DEBUG_HEROES_LIST["0"] = hero
-heroAbilities["0"] = {2,1,0}
+heroAbilities["0"] = {1,2,1}
 heroItems["0"] = {
     { ["name"] = "item_wood_shield_datadriven", ["cost"] = 100}
 }
@@ -62,4 +62,4 @@ for heroKey, hero in pairs(DEBUG_HEROES_LIST) do
 end
 
 hero = PlayerResource:GetSelectedHeroEntity( 0 )
-hero:ForceKill(false)
+--hero:ForceKill(false)

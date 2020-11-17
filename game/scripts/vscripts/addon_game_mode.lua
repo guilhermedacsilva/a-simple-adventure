@@ -37,12 +37,19 @@ function Precache( context )
   PrecacheModel("particles/generic_gameplay/generic_lifesteal.vpcf", context)
   PrecacheModel("particles/econ/courier/courier_babyroshan_winter18/courier_babyroshan_winter18_ambient_sparks.vpcf", context)
   PrecacheModel("particles/battlepass/healing_fire_torch_glow.vpcf", context)
+  PrecacheModel("particles/generic_gameplay/dropped_item.vpcf", context)
+  PrecacheModel("particles/hw_fx/hw_candy_projectile.vpcf", context)
+
+  --PrecacheResource("soundfile", "sounds/ui/coins_big.vsnd", context)
+  --PrecacheResource("model_folder", "particles/econ/items/shadow_fiend/sf_fire_arcana", context)
+  --PrecacheModel("sounds/ui/coins_big.vsnd", context)
 
   -- Sounds can precached here like anything else
-  --PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_legion_commander.vsndevts", context)
+  PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_ember_spirit.vsndevts", context)
   PrecacheResource("soundfile", "sounds/weapons/hero/legion_commander/overwhelming_target01.vsnd", context)
   PrecacheResource("soundfile", "sounds/weapons/hero/legion_commander/overwhelming_target02.vsnd", context)
   PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_lina.vsndevts", context)
+  PrecacheResource("soundfile", "soundevents/my_adventure_sounds.vsndevts", context)
 
   -- Entire items can be precached by name
   -- Abilities can also be precached in this way despite the name

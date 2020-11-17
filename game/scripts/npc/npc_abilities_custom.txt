@@ -319,17 +319,15 @@
 
 	"wind_first_aid_kit_datadriven"
 	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"				"ability_datadriven"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
-		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
 		"AbilityTextureName"			"roshan_halloween_candy"
 
 		"AbilityCooldown"				"20"
-		"AbilityCastRange"				"300"
+		"AbilityCastRange"				"500"
 		"AbilityCastPoint"				"0.4"
 		"AbilityManaCost"				"50 75 100 125"
 		"AbilityChannelTime"			"4"
@@ -350,6 +348,12 @@
 
 		"OnSpellStart"
 		{
+			"RunScript"
+			{
+				"ScriptFile"	"ability/wind_first_aid_kit.lua"
+				"Function"		"WindFirstAidKitGetTarget"
+			}
+
 			"FireSound"
 			{
 				"EffectName"	"DOTA_Item.HealingSalve.Activate"
@@ -402,6 +406,16 @@
 			"modifier_wind_first_aid_kit_caster_datadriven"
 			{
 				"IsHidden"	"1"
+
+				"ThinkInterval"	"0.5"
+				"OnIntervalThink"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"ability/wind_first_aid_kit.lua"
+						"Function"		"WindFirstAidKitFireCandy"
+					}
+				}
 
 				"States"
 				{
@@ -814,6 +828,11 @@
 				"GrantsGold"  "0"
 				"GrantsXP"    "0"
 				"SpawnRadius" "200"
+			}
+			"FireSound"
+			{
+				"EffectName"	"Hero_EmberSpirit.FireRemnant.Cast"
+				"Target" 		"CASTER"
 			}
 		}
 	}

@@ -1,0 +1,20 @@
+"DOTAAbilities"
+{
+    "item_tpscroll"
+    {
+        "ItemCost"          "100000"
+        "ItemPurchasable"   "0"
+    }
+
+    "item_ward_observer"
+    {
+        "ItemCost"          "100000"
+        "ItemPurchasable"   "0"
+    }
+
+    "item_ward_sentry"
+    {
+        "ItemCost"          "100000"
+        "ItemPurchasable"   "0"
+    }
+}
