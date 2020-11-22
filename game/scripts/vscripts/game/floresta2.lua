@@ -15,13 +15,12 @@ function Floresta2:Init()
     self.spawnerWolf1 = Entities:FindByName(nil, "spawner_wolf1"):GetAbsOrigin()
     self.spawnerWolf2 = Entities:FindByName(nil, "spawner_wolf2"):GetAbsOrigin()
     self.spawnerWolf3 = Entities:FindByName(nil, "spawner_wolf3"):GetAbsOrigin()
-    self.enemies = {}
     GameRules:GetGameModeEntity():SetThink( "MoveGoat", self, 1 )
     GameRules:GetGameModeEntity():SetThink( "SpawnBandits", self, 13 )
 end
 
 function Floresta2:MoveGoat()
-    local enemiesNear = SimpleAdventure:EnemiesInRange(self.goat:GetAbsOrigin(), 1000)
+    local enemiesNear = SimpleAdventure:EnemiesInRange(self.goat:GetAbsOrigin(), 850)
 
     if self.goat == nil or self.goat == none or not self.goat:IsAlive() then
         GameRules:SetGameWinner(DOTA_TEAM_BADGUYS)
@@ -94,7 +93,8 @@ function Floresta2:SpawnBandits()
 end
 
 function Floresta2:EndLevel()
-    SimpleAdventure:LevelUp(200)
+    SimpleAdventure:LevelUp(2)
+    SimpleAdventure:StartNextScene(Dire1)
 end
 
 
@@ -103,5 +103,12 @@ function Floresta2:DebugScene()
     Floresta1.goat = CreateUnitByName("npc_unit_delivery_goat", moveTo, true, nil, nil, DOTA_TEAM_GOODGUYS)
     local v = Entities:FindByName(nil, "tree_path_left"):GetAbsOrigin()
     GridNav:DestroyTreesAroundPoint(v, 400, false)
+
+    local pos = 1
+    for _, hero in pairs(HEROES) do
+        hero:SetOrigin(Vector(moveTo.x + pos * 100, moveTo.y - 150, 128))
+        pos = pos + 1
+    end
+
     self:Init()
 end

@@ -42,6 +42,22 @@ function AICore:StartCooldown(ability)
 end
 
 -- CAST --------------------------------------------------
+function AICore:OrderNone(entity)
+    ExecuteOrderFromTable({
+      UnitIndex = entity:entindex(),
+      OrderType = DOTA_UNIT_ORDER_NONE,
+      Queue = false
+    })
+end
+
+function AICore:AttackTarget(entity, target)
+    ExecuteOrderFromTable({
+      UnitIndex = entity:entindex(),
+      OrderType = DOTA_UNIT_ORDER_ATTACK_TARGET,
+      TargetIndex = target:entindex(),
+      Queue = false
+    })
+end
 
 function AICore:FindAbility(entity, abilityName)
   local ability = entity:FindAbilityByName( abilityName )

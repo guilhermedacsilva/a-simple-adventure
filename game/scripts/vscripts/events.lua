@@ -343,7 +343,7 @@ function GameMode:OnPlayerChat(keys)
   local text = keys.text
 
   if text == "revive" then
-    for _, hero in pairs (DEBUG_HEROES_LIST) do
+    for _, hero in pairs (HEROES) do
       if hero ~= nil and not hero:IsAlive() then
         hero:RespawnUnit()
       end
@@ -351,11 +351,14 @@ function GameMode:OnPlayerChat(keys)
   end
 
   if text == "p" then
-    for _, hero in pairs (DEBUG_HEROES_LIST) do
+    for _, hero in pairs (HEROES) do
       if hero ~= nil and hero:IsAlive() then
 
-        local pIdx = ParticleManager:CreateParticle("particles/generic_gameplay/generic_lifesteal.vpcf", PATTACH_ABSORIGIN_FOLLOW, hero)
-        Timers:CreateTimer(3, function()
+        local pIdx = ParticleManager:CreateParticle(
+          "particles/units/heroes/hero_broodmother/broodmother_spin_web_cast.vpcf", PATTACH_OVERHEAD_FOLLOW, hero)
+          --"particles/units/heroes/hero_broodmother/broodmother_web.vpcf", PATTACH_OVERHEAD_FOLLOW, hero)
+        ParticleManager:SetParticleControl(pIdx, 1, Vector(400,0,0))
+        Timers:CreateTimer(5, function()
                 ParticleManager:DestroyParticle(pIdx, false)
                 return nil
             end

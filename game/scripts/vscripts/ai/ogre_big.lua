@@ -8,6 +8,10 @@ function BossThink()
         return nil
     end
 
+    if thisEntity:GetHealth() == thisEntity:GetMaxHealth() then
+        return 2
+    end
+
     if thisEntity._abilitySmash:IsFullyCastable() then
         units = AICore:BotFindEnemies(thisEntity:GetOrigin(), 600)
         if #units > 0 then

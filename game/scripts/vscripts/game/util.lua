@@ -11,9 +11,10 @@ function createDangerCircle(position, radius, duration)
     )
 end
 
-function destroyParticleAfter(particleIdx, seconds)
+function destroyParticleAfter(particleIdx, seconds, noAnimation)
+    noAnimation = noAnimation or false
     Timers:CreateTimer(seconds, function()
-            ParticleManager:DestroyParticle(particleIdx, false)
+            ParticleManager:DestroyParticle(particleIdx, noAnimation)
             return nil
         end
     )

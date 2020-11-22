@@ -4,8 +4,7 @@ if DEBUG_HEROES then
     DEBUG_QNT_HEROES = 3
     FORCE_PICKED_HERO = "npc_dota_hero_mars"
     STARTING_GOLD = 99999
-    DEBUG_HEROES_LIST = {}
-    DEBUG_START_SCENE = 1
+    DEBUG_START_SCENE = 3
 else
     STARTING_GOLD = 0
 end
@@ -15,6 +14,11 @@ ENABLE_HERO_RESPAWN = false              -- Should the heroes automatically resp
 UNIVERSAL_SHOP_MODE = true             -- Should the main shop contain Secret Shop items as well as regular items
 ALLOW_SAME_HERO_SELECTION = false        -- Should we let people select the same hero as each other
 HEROES = {}
+GOLD_TABLE = {}
+GOLD_TABLE[1] = 100
+for i=2,20 do
+  GOLD_TABLE[i] = GOLD_TABLE[i-1] * 2
+end
 
 HERO_SELECTION_TIME = 30.0              -- How long should we let people select their hero?
 PRE_GAME_TIME = 1.0                    -- How long after people select their heroes should the horn blow and the game start?

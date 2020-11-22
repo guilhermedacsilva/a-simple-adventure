@@ -14,6 +14,8 @@
     "weapons_armor" // mid left
     {
         "item"    "item_claws_datadriven"
+        "item"    "item_claymore_datadriven"
+        "item"    "item_axe_datadriven"
     }
 
     "misc" // mid right

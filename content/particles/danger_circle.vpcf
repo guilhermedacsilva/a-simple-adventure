@@ -65,7 +65,7 @@
 		{
 			_class = "C_INIT_RemapCPtoScalar"
 			m_nCPInput = 2
-			m_nFieldOutput = 7
+			m_nFieldOutput = "7"
 			m_flInputMax = 255.0
 			m_flOutputMax = 255.0
 		},
@@ -102,7 +102,7 @@
 			m_vecTexturesInput = 
 			[
 				{
-					m_hTexture = resource:"materials/particle/circle_hollow01.vtex"
+					m_hTexture = resource:"materials/particle/circle.vtex"
 				},
 			]
 			m_OutlineColor = [ 255, 255, 255 ]

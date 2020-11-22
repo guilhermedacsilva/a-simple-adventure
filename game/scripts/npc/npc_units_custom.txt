@@ -231,6 +231,229 @@
     	"BoundsHullName"      "DOTA_HULL_SIZE_HUGE"
 	}
 
+	"npc_unit_spider_bomb"
+	{
+		"BaseClass"         "npc_dota_creature"
+		"Model"           "models/items/broodmother/spiderling/virulent_matriarchs_spiderling/virulent_matriarchs_spiderling.vmdl"
+		"SoundSet"          "n_creep_Melee"
+		"Level"           "1"
+		"ModelScale"                "0.7"
+
+        "Ability1"      "spider_poison_sting_datadriven"
+        "Ability2"      "spider_explode_datadriven"
+
+		"AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageMin"     "10"
+		"AttackDamageMax"     "30"
+		"AttackRate"        "1.5"
+		"AttackAnimationPoint"    "0.38"
+		"AttackAcquisitionRange"  "275"
+		"AttackRange"       "100"
+
+		"StatusHealth"        "100"
+
+		"RingRadius"              "80"
+		"HealthBarOffset"           "220"
+		"MovementCapabilities"    "DOTA_UNIT_CAP_MOVE_GROUND"
+		"MovementSpeed"       "250"
+		"MovementTurnRate"      "1.0"
+		"FollowRange"       "9999"
+		"VisionDaytimeRange"    "9999"
+		"VisionNighttimeRange"    "9999"
+	}
+
+	"npc_unit_spider_small"
+	{
+    	"vscripts"                  "ai/spider_small.lua"
+		"BaseClass"         "npc_dota_creature"
+		"Model"           "models/heroes/broodmother/spiderling.vmdl"
+		"SoundSet"          "n_creep_Melee"
+		"Level"           "1"
+		"ModelScale"                "0.4"
+
+        "Ability1"      "spider_poison_sting_datadriven"
+
+		"AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageMin"     "10"
+		"AttackDamageMax"     "10"
+		"AttackRate"        "0.8"
+		"AttackAnimationPoint"    "0.38"
+		"AttackAcquisitionRange"  "450"
+		"AttackRange"       "90"
+
+		"StatusHealth"        "200"
+        "ArmorPhysical"     "1"
+
+		"RingRadius"              "70"
+		"HealthBarOffset"           "200"
+		"MovementCapabilities"    "DOTA_UNIT_CAP_MOVE_GROUND"
+		"MovementSpeed"       "350"
+		"MovementTurnRate"      "1.0"
+		"FollowRange"       "9999"
+		"VisionDaytimeRange"    "9999"
+		"VisionNighttimeRange"    "9999"
+	}
+
+	"npc_unit_spider_mecha"
+	{
+		"BaseClass"         "npc_dota_creature"
+		"Model"           "models/items/broodmother/spiderling/ti9_cache_brood_mother_of_thousands_spiderling/ti9_cache_brood_mother_of_thousands_spiderling.vmdl"
+		"SoundSet"          "n_creep_Melee"
+		"Level"           "1"
+		"ModelScale"                "0.7"
+
+        "Ability1"      "spell_immunity_datadriven"
+        "Ability2"      "spider_mecha_explode_datadriven"
+
+		"AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageMin"     "30"
+		"AttackDamageMax"     "30"
+		"AttackRate"        "2"
+		"AttackAnimationPoint"    "0.38"
+		"AttackAcquisitionRange"  "450"
+		"AttackRange"       "100"
+
+		"StatusHealth"        "275"
+        "ArmorPhysical"     "1"
+
+		"RingRadius"              "120"
+		"HealthBarOffset"           "200"
+		"MovementCapabilities"    "DOTA_UNIT_CAP_MOVE_GROUND"
+		"MovementSpeed"       "300"
+		"MovementTurnRate"      "1.0"
+		"FollowRange"       "9999"
+		"VisionDaytimeRange"    "9999"
+		"VisionNighttimeRange"    "9999"
+    	"BoundsHullName"      "DOTA_HULL_SIZE_HUGE"
+	}
+
+	"npc_unit_spider_radioactive"
+	{
+		"BaseClass"         "npc_dota_creature"
+		"Model"           "models/items/broodmother/spiderling/lycosidae_spiderling/lycosidae_spiderling.vmdl"
+		"SoundSet"          "n_creep_Melee"
+		"Level"           "1"
+		"ModelScale"                "1"
+
+        "Ability1"      "spider_poison_sting_datadriven"
+        "Ability2"      "spider_radioactive_datadriven"
+
+		"AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageMin"     "20"
+		"AttackDamageMax"     "20"
+		"AttackRate"        "3"
+		"AttackAnimationPoint"    "0.38"
+		"AttackAcquisitionRange"  "450"
+		"AttackRange"       "100"
+
+		"StatusHealth"        "100"
+        "ArmorPhysical"     "100"
+
+		"RingRadius"              "120"
+		"HealthBarOffset"           "200"
+		"MovementCapabilities"    "DOTA_UNIT_CAP_MOVE_GROUND"
+		"MovementSpeed"       "300"
+		"MovementTurnRate"      "1.0"
+		"FollowRange"       "9999"
+		"VisionDaytimeRange"    "9999"
+		"VisionNighttimeRange"    "9999"
+    	"BoundsHullName"      "DOTA_HULL_SIZE_HUGE"
+	}
+
+	"npc_unit_spider_brood"
+	{
+    	"vscripts"              "ai/spider_brood.lua"
+		"BaseClass"         "npc_dota_creature"
+		"Model"           "models/heroes/broodmother/broodmother.vmdl"
+		"SoundSet"          "Hero_Broodmother"
+		"Level"           "1"
+		"ModelScale"                "1.5"
+
+        "Ability1"      "spider_poison_sting_datadriven"
+        "Ability2"      "spider_brood_web_datadriven"
+        "Ability3"      "spider_brood_summon_datadriven"
+
+		"AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageMin"     "30"
+		"AttackDamageMax"     "30"
+		"AttackRate"        "1.5"
+		"AttackAnimationPoint"    "0.38"
+		"AttackAcquisitionRange"  "450"
+		"AttackRange"       "150"
+
+		"StatusHealth"        "1200"
+        "ArmorPhysical"     "2"
+
+		"RingRadius"              "180"
+		"HealthBarOffset"           "200"
+		"MovementCapabilities"    "DOTA_UNIT_CAP_MOVE_GROUND"
+		"MovementSpeed"       "330"
+		"MovementTurnRate"      "1.0"
+		"FollowRange"       "9999"
+		"VisionDaytimeRange"    "9999"
+		"VisionNighttimeRange"    "9999"
+    	"BoundsHullName"      "DOTA_HULL_SIZE_HUGE"
+
+	    "Creature"
+	    {
+	        "AttachWearables"
+	        {
+	            "Wearable1"
+	            {
+	                "ItemDef"           "5515" // head
+	            }
+	            "Wearable2"
+	            {
+	                "ItemDef"           "9090" // back
+	            }
+	            "Wearable3"
+	            {
+	                "ItemDef"           "5516" // legs
+	            }
+	            "Wearable4"
+	            {
+	                "ItemDef"           "5514" // misc
+	            }
+	        }
+	    }
+	}
+
+	"npc_unit_spider_broodling"
+	{
+		"BaseClass"         "npc_dota_creature"
+		"Model"           "models/items/broodmother/spiderling/lycosidae_spiderling/lycosidae_spiderling.vmdl"
+		"SoundSet"          "n_creep_Melee"
+		"Level"           "1"
+		"ModelScale"                "0.5"
+
+        "Ability1"      "spider_poison_sting_datadriven"
+        "Ability2"      "spider_radioactive_datadriven"
+
+		"AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageMin"     "5"
+		"AttackDamageMax"     "5"
+		"AttackRate"        "1"
+		"AttackAnimationPoint"    "0.38"
+		"AttackAcquisitionRange"  "999"
+		"AttackRange"       "80"
+
+		"StatusHealth"        "7"
+        "ArmorPhysical"     "100"
+
+		"RingRadius"              "90"
+		"HealthBarOffset"           "200"
+		"MovementCapabilities"    "DOTA_UNIT_CAP_MOVE_GROUND"
+		"MovementSpeed"       "500"
+		"MovementTurnRate"      "2"
+		"FollowRange"       "9999"
+		"VisionDaytimeRange"    "9999"
+		"VisionNighttimeRange"    "9999"
+	}
+
+	// ----------------------------------------------------------------------
+	// SPELLS
+	// ----------------------------------------------------------------------
+
 	"npc_unit_fire_elemental1"
 	{
 		"BaseClass"         "npc_dota_creature"
@@ -246,9 +469,90 @@
 		"AttackDamageMax"     "5"
 		"AttackRate"        "2"
 		"AttackAnimationPoint"    "0.38"
-		"AttackRange"       "100"
+		"AttackRange"       "120"
 
 		"StatusHealth"        "125"
+
+		"RingRadius"              "40"
+		"HealthBarOffset"           "150"
+		"MovementCapabilities"    "DOTA_UNIT_CAP_MOVE_GROUND"
+		"MovementSpeed"       "300"
+		"MovementTurnRate"      "1.0"
+        "VisionDaytimeRange"        "550"
+        "VisionNighttimeRange"      "450"
+	}
+	"npc_unit_fire_elemental2"
+	{
+		"BaseClass"         "npc_dota_creature"
+		"Model"           "models/items/invoker/forge_spirit/arsenal_magus_forged_spirit/arsenal_magus_forged_spirit.vmdl"
+		"SoundSet"          "n_creep_Melee"
+		"Level"           "1"
+		"ModelScale"                "1.15"
+
+        "Ability1"      "fire_elemental_aura_datadriven2"
+
+		"AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageMin"     "10"
+		"AttackDamageMax"     "10"
+		"AttackRate"        "2"
+		"AttackAnimationPoint"    "0.38"
+		"AttackRange"       "120"
+
+		"StatusHealth"        "250"
+
+		"RingRadius"              "40"
+		"HealthBarOffset"           "150"
+		"MovementCapabilities"    "DOTA_UNIT_CAP_MOVE_GROUND"
+		"MovementSpeed"       "300"
+		"MovementTurnRate"      "1.0"
+        "VisionDaytimeRange"        "550"
+        "VisionNighttimeRange"      "450"
+	}
+	"npc_unit_fire_elemental3"
+	{
+		"BaseClass"         "npc_dota_creature"
+		"Model"           "models/items/invoker/forge_spirit/cadenza_spirit/cadenza_spirit.vmdl"
+		"SoundSet"          "n_creep_Melee"
+		"Level"           "1"
+		"ModelScale"                "1.5"
+
+        "Ability1"      "fire_elemental_aura_datadriven3"
+
+		"AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageMin"     "15"
+		"AttackDamageMax"     "15"
+		"AttackRate"        "2"
+		"AttackAnimationPoint"    "0.38"
+		"AttackRange"       "120"
+
+		"StatusHealth"        "375"
+
+		"RingRadius"              "40"
+		"HealthBarOffset"           "150"
+		"MovementCapabilities"    "DOTA_UNIT_CAP_MOVE_GROUND"
+		"MovementSpeed"       "300"
+		"MovementTurnRate"      "1.0"
+        "VisionDaytimeRange"        "550"
+        "VisionNighttimeRange"      "450"
+	}
+	"npc_unit_fire_elemental4"
+	{
+		"BaseClass"         "npc_dota_creature"
+		"Model"           "models/items/invoker/forge_spirit/grievous_ingots/grievous_ingots.vmdl"
+		"SoundSet"          "n_creep_Melee"
+		"Level"           "1"
+		"ModelScale"                "1.35"
+
+        "Ability1"      "fire_elemental_aura_datadriven4"
+
+		"AttackCapabilities"    "DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageMin"     "20"
+		"AttackDamageMax"     "20"
+		"AttackRate"        "2"
+		"AttackAnimationPoint"    "0.38"
+		"AttackRange"       "150"
+
+		"StatusHealth"        "500"
 
 		"RingRadius"              "40"
 		"HealthBarOffset"           "150"

@@ -1,17 +1,19 @@
 require('game/floresta1')
 require('game/floresta2')
+require('game/dire1')
 
 if SimpleAdventure == nil then
     SimpleAdventure = class({})
 end
 
 function SimpleAdventure:Init()
-    self.shopLevel = 0
     if DEBUG_HEROES then
         if DEBUG_START_SCENE == 1 then
             Floresta1:Init()
         elseif DEBUG_START_SCENE == 2 then
             Floresta2:DebugScene()
+        elseif DEBUG_START_SCENE == 3 then
+            Dire1:DebugScene()
         end
     else
         for nPlayerID = 0, DOTA_MAX_TEAM_PLAYERS-1 do
@@ -22,6 +24,17 @@ function SimpleAdventure:Init()
         end
         Floresta1:Init()
     end
+    GameRules:GetGameModeEntity():SetThink( "IsGameOver", self, 3 )
+end
+
+function SimpleAdventure:IsGameOver()
+    for _,h in pairs(HEROES) do
+        if h ~= nil and h:IsAlive() then
+            return 2
+        end
+    end
+    GameRules:SetGameWinner(DOTA_TEAM_BADGUYS)
+    return nil
 end
 
 function SimpleAdventure:EnemiesInRange(targetVector, radius)
@@ -47,17 +60,12 @@ function SimpleAdventure:StartNextScene(sceneObj)
     GameRules:GetGameModeEntity():SetThink( "Init", sceneObj, 3 )
 end
 
-function SimpleAdventure:LevelUp(gold)
-    local heroList = HEROES
-    if DEBUG_HEROES then
-        heroList = DEBUG_HEROES_LIST
-    end
-
-    for _, hero in pairs (heroList) do
+function SimpleAdventure:LevelUp(scene)
+    for _, hero in pairs (HEROES) do
         if not hero:IsAlive() then
             hero:RespawnUnit()
         end
-        hero:ModifyGold(gold, true, 0)
+        hero:ModifyGold(GOLD_TABLE[scence], true, 0)
         hero:AddExperience(100, 0, false, false)
     end
     self:RefreshAllUnits()

@@ -16,6 +16,15 @@ function Floresta1:Init()
     self.spawnerBot3 = Entities:FindByName(nil, "spawner_bandit_bot3"):GetAbsOrigin()
     GameRules:GetGameModeEntity():SetThink( "MoveGoat", self, 5 )
     GameRules:GetGameModeEntity():SetThink( "SpawnBandits", self, 7 )
+
+    if DEBUG_HEROES then
+        local start_area = Entities:FindByName(nil, "spawner_area_goat"):GetAbsOrigin()
+        local pos = 1
+        for _, hero in pairs(HEROES) do
+            hero:SetOrigin(Vector(start_area.x - 150, start_area.y + pos * 100,128))
+            pos = pos + 1
+        end
+    end
 end
 
 function Floresta1:GiveStartItems()
@@ -28,7 +37,7 @@ function Floresta1:GiveStartItems()
 end
 
 function Floresta1:MoveGoat()
-    local enemiesNear = SimpleAdventure:EnemiesInRange(self.goat:GetAbsOrigin(), 1000)
+    local enemiesNear = SimpleAdventure:EnemiesInRange(self.goat:GetAbsOrigin(), 850)
 
     if self.goat == nil or self.goat == none or not self.goat:IsAlive() then
         GameRules:SetGameWinner(DOTA_TEAM_BADGUYS)
@@ -74,9 +83,6 @@ function Floresta1:SpawnBandits()
     if self.goatTargetNum == 1 then
         SimpleAdventure:CreateEnemy("npc_unit_kobold_1", self.spawnerTop1, 2)
         SimpleAdventure:CreateEnemy("npc_unit_kobold_1", self.spawnerBot1, 2)
-
-        CreateItemOnPositionSync(self.spawnerTop1, CreateItem("item_clarity_datadriven", nil, nil))
-        CreateItemOnPositionSync(self.spawnerBot1, CreateItem("item_clarity_datadriven", nil, nil))
     elseif self.goatTargetNum == 2 then
         SimpleAdventure:CreateEnemy("npc_unit_kobold_1", self.spawnerTop1, 1)
         SimpleAdventure:CreateEnemy("npc_unit_kobold_1", self.spawnerBot1, 1)
@@ -96,6 +102,6 @@ end
 function Floresta1:EndLevel()
     local v = Entities:FindByName(nil, "tree_path_left"):GetAbsOrigin()
     GridNav:DestroyTreesAroundPoint(v, 400, false)
-    SimpleAdventure:LevelUp(100)
+    SimpleAdventure:LevelUp(1)
     SimpleAdventure:StartNextScene(Floresta2)
 end

@@ -57,6 +57,10 @@
         "ItemShopTags"                  "consumable"
         "ItemQuality"                   "consumable"
         "ItemAliases"                   "flask"
+        "ItemStackable"                 "1"
+        "ItemShareability"              "ITEM_FULLY_SHAREABLE"
+        "ItemPermanent"                 "0"
+        "ItemInitialCharges"            "1"
 
         "AbilitySpecial"
         {
@@ -140,6 +144,10 @@
         "ItemShopTags"                  "consumable"
         "ItemQuality"                   "consumable"
         "ItemAliases"                   "clarity_pot"
+        "ItemStackable"                 "1"
+        "ItemShareability"              "ITEM_FULLY_SHAREABLE"
+        "ItemPermanent"                 "0"
+        "ItemInitialCharges"            "1"
 
         "AbilitySpecial"
         {
@@ -226,6 +234,124 @@
             {
                 "var_type"              "FIELD_INTEGER"
                 "bonus_attack"        "5"
+            }
+        }
+        "Modifiers"
+        {
+            "modifier_item_claws_datadriven"
+            {
+                "Passive"           "1"
+                "IsHidden"          "1"
+                "Attributes"        "MODIFIER_ATTRIBUTE_MULTIPLE"
+                "Properties"
+                {
+                    "MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE"        "%bonus_attack"
+                }
+            }
+        }
+    }
+
+    "item_claymore_datadriven"
+    {
+        "BaseClass"                     "item_datadriven"
+        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+        "Model"                         "models/props_gameplay/red_box.vmdl"
+        "Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
+
+        "AbilityTextureName"            "claymore"
+        "ItemCost"                      "200"
+
+        "AbilitySpecial"
+        {
+            "01"
+            {
+                "var_type"              "FIELD_INTEGER"
+                "bonus_attack"        "12"
+            }
+        }
+        "Modifiers"
+        {
+            "modifier_item_claws_datadriven"
+            {
+                "Passive"           "1"
+                "IsHidden"          "1"
+                "Attributes"        "MODIFIER_ATTRIBUTE_MULTIPLE"
+                "Properties"
+                {
+                    "MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE"        "%bonus_attack"
+                }
+            }
+        }
+    }
+
+    "item_axe_datadriven"
+    {
+        "BaseClass"                     "item_datadriven"
+        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+        "Model"                         "models/props_gameplay/red_box.vmdl"
+        "Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
+
+        "AbilityTextureName"            "ogre_axe"
+        "ItemCost"                      "200"
+
+        "AbilitySpecial"
+        {
+            "01"
+            {
+                "var_type"              "FIELD_INTEGER"
+                "bonus_attack"        "5"
+            }
+            "02"
+            {
+                "var_type"              "FIELD_INTEGER"
+                "cleave_damage_percent"        "10"
+            }
+            "03"
+            {
+                "var_type"              "FIELD_INTEGER"
+                "cleave_radius"        "250"
+            }
+        }
+        "Modifiers"
+        {
+            "modifier_item_axe_datadriven"
+            {
+                "Passive"           "1"
+                "IsHidden"          "1"
+                "Attributes"        "MODIFIER_ATTRIBUTE_MULTIPLE"
+                "Properties"
+                {
+                    "MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE"        "%bonus_attack"
+                }
+                "OnAttackLanded"
+                {
+                    "CleaveAttack"
+                    {
+                        "CleavePercent"     "%cleave_damage_percent"
+                        "CleaveRadius"      "%cleave_radius"
+                        "CleaveEffect"      "particles/items_fx/battlefury_cleave.vpcf"
+                    }
+                }
+            }
+        }
+    }
+
+    "item_claymore_datadriven"
+    {
+        "BaseClass"                     "item_datadriven"
+        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+        "Model"                         "models/props_gameplay/red_box.vmdl"
+        "Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
+
+        "AbilityTextureName"            "claymore"
+        "ItemCost"                      "200"
+
+        "AbilitySpecial"
+        {
+            "01"
+            {
+                "var_type"              "FIELD_INTEGER"
+                "bonus_attack"        "12"
             }
         }
         "Modifiers"

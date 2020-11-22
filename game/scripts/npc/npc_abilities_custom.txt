@@ -6,6 +6,97 @@
 	//-------------------------------------------------------------------------------------------------------------
 	// MARS
 	//-------------------------------------------------------------------------------------------------------------
+	"mars_spear_datadriven"
+	{
+		"BaseClass"				"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_POINT"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityTextureName"			"mars_spear"
+		"AbilityCastAnimation" 			"ACT_DOTA_CAST_ABILITY_5"
+
+		"AbilityCastRange"				"500"
+		"AbilityCastPoint"				"0.3"
+		"AbilityCooldown"				"10"
+		"AbilityManaCost"				"25 45 65 85"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"spear_speed"		"1200"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"spear_width"	"200"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"spear_distance"			"600"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"dmg1"			"80 160 240 320"
+			}
+			"05"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"dmg2"			"40 80 120 160"
+			}
+			"06"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"dmg3"			"20 40 60 80"
+			}
+		}
+
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"ability/mars_abilities.lua"
+				"Function"		"MarsSpearOnStartSpell"
+			}
+
+			"LinearProjectile"
+			{
+				"Target"      "POINT"
+			    "EffectName"  "particles/units/heroes/hero_mars/mars_spear.vpcf"
+			    "MoveSpeed"   "%spear_speed"
+			    "StartRadius"   "%spear_width"
+			    "StartPosition" "attach_origin"
+			    "EndRadius"     "%spear_width"
+			    "FixedDistance" "%spear_distance"
+			    "TargetTeams"   "DOTA_UNIT_TARGET_TEAM_ENEMY"
+			    "TargetTypes"   "DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
+			    "TargetFlags"   "DOTA_UNIT_TARGET_FLAG_NONE"
+			}
+
+			"FireSound"
+			{
+				"EffectName"	"Hero_Mars.Spear.Cast"
+				"Target"		"CASTER"
+			}
+		}
+
+		"OnProjectileHitUnit"
+		{
+			"DeleteOnHit"	"0"
+
+			"RunScript"
+			{
+				"ScriptFile"	"ability/mars_abilities.lua"
+				"Function"		"MarsSpearOnHit"
+			}
+		}
+	}
+
 	"mars_warcry_datadriven"
 	{
 		// General
@@ -31,7 +122,7 @@
 		// Time
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilityCooldown"				"30"
-		"AbilityDuration"				"7 8 9 10"
+		"AbilityDuration"				"10 12 14 16"
 
 		// Cost
 		//-------------------------------------------------------------------------------------------------------------
@@ -191,14 +282,15 @@
 				{
 					"RunScript"
 					{
-						"ScriptFile"	"ability/mars_battle_victory.lua"
+						"ScriptFile"	"ability/mars_abilities.lua"
 						"Function"		"MarsBattleVictoryOnDeath"
 					}
 				}
 			}
 		}
-
 	}
+
+
 
 	//-------------------------------------------------------------------------------------------------------------
 	// WINDRUNNER / WINDRANGER
@@ -234,7 +326,7 @@
 			"02"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"radius"				"150 200 250 300"
+				"radius"				"150 225 300 375"
 			}
 		}
 
@@ -283,40 +375,6 @@
 		}
 	}
 
-	"wind_attack_speed_datadriven"
-	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
-		"BaseClass"				"ability_datadriven"
-		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"AbilityTextureName"	"windrunner_focusfire"
-
-		// Special
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"					"FIELD_INTEGER"
-				"bonus_attack_speed"				"10 20 30 40"
-			}
-		}
-
-		"Modifiers"
-		{
-			"modifier_wind_attack_speed_datadriven"
-			{
-				"Passive"	"1"
-				"IsHidden"	"1"
-
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"	"%bonus_attack_speed"
-				}
-			}
-		}
-	}
-
 	"wind_first_aid_kit_datadriven"
 	{
 		"BaseClass"				"ability_datadriven"
@@ -350,7 +408,7 @@
 		{
 			"RunScript"
 			{
-				"ScriptFile"	"ability/wind_first_aid_kit.lua"
+				"ScriptFile"	"ability/wind_abilities.lua"
 				"Function"		"WindFirstAidKitGetTarget"
 			}
 
@@ -412,7 +470,7 @@
 				{
 					"RunScript"
 					{
-						"ScriptFile"	"ability/wind_first_aid_kit.lua"
+						"ScriptFile"	"ability/wind_abilities.lua"
 						"Function"		"WindFirstAidKitFireCandy"
 					}
 				}
@@ -425,6 +483,8 @@
 			"modifier_wind_first_aid_kit_target_datadriven"
 			{
             	"IsBuff" "1"
+				"EffectName"        "particles/econ/courier/courier_babyroshan_winter18/courier_babyroshan_winter18_ambient_sparks.vpcf"
+				"EffectAttachType"  "follow_overhead"
 
 				"ThinkInterval"	"0.2"
 				"OnIntervalThink"
@@ -435,16 +495,84 @@
 						"HealAmount"	"%heal"
 					}
 				}
+			}
+		}
+	}
 
-				"OnCreated"
+	"wind_attack_speed_datadriven"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"				"ability_datadriven"
+		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityTextureName"	"windrunner_focusfire"
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"bonus_attack_speed"				"10 20 30 40"
+			}
+		}
+
+		"Modifiers"
+		{
+			"modifier_wind_attack_speed_datadriven"
+			{
+				"Passive"	"1"
+				"IsHidden"	"1"
+
+				"Properties"
 				{
-					"AttachEffect"
+					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"	"%bonus_attack_speed"
+				}
+			}
+		}
+	}
+
+	"wind_hunter_knowledge_datadriven"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"				"ability_datadriven"
+		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
+		"AbilityTextureName"	"ursa_fury_swipes"
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"damage_per_stack"				"1.5 3 4.5 6"
+			}
+		}
+
+		"Modifiers"
+		{
+			"modifier_wind_hunter_knowledge_datadriven"
+			{
+				"Passive"	"1"
+				"IsHidden"	"1"
+
+				"OnAttackLanded"
+				{
+					"RunScript"
 					{
-						"EffectName"        "particles/econ/courier/courier_babyroshan_winter18/courier_babyroshan_winter18_ambient_sparks.vpcf"
-						"EffectAttachType"  "follow_overhead"
-						"Target"            "TARGET"
+						"ScriptFile"	"ability/wind_abilities.lua"
+						"Function"		"WindHunterKnowledge"
 					}
 				}
+			}
+			"modifier_wind_hunter_knowledge_target_datadriven"
+			{
+				"IsDebuff"	"1"
+				"Duration" "180"
 			}
 		}
 	}
@@ -489,7 +617,7 @@
 
 		// Cost
 		//-------------------------------------------------------------------------------------------------------------
-		"AbilityManaCost"				"25"
+		"AbilityManaCost"				"25 45 65 85"
 
 		// Special
 		//-------------------------------------------------------------------------------------------------------------
@@ -572,8 +700,8 @@
 				"IsDebuff"	"1"
 				"Duration"	"%AbilityDuration"
 
-				//"EffectName"	"particles/units/heroes/hero_sven/sven_warcry_buff.vpcf"
-				//"EffectAttachType"	"follow_origin"
+				"EffectName"	"particles/generic_gameplay/generic_disarm.vpcf"
+				"EffectAttachType"	"follow_overhead"
 
 				"Properties"
 				{
@@ -586,8 +714,6 @@
 
 	"lina_light_strike_array_datadriven"
 	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"				"ability_datadriven"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
@@ -598,8 +724,6 @@
 		"AbilityCastPoint"				"0.45"
 		"AOERadius"						"%light_strike_array_aoe"
 
-		// Precache
-		//-------------------------------------------------------------------------------------------------------------
 		"precache"
 		{
 			"soundfile"			"soundevents/game_sounds_heroes/game_sounds_lina.vsndevts"
@@ -608,21 +732,11 @@
 			"particle"			"particles/generic_gameplay/generic_stunned.vpcf"
 		}
 
-		// Time
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityCooldown"				"12"
 		"AbilityDuration"				"2.0 2.25 2.5 2.75"
-
-		// Damage.
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityDamage"					"40 80 120 160"
-
-		// Cost
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityManaCost"				"30 50 70 90"
 
-		// Special
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilitySpecial"
 		{
 			"01"
@@ -837,7 +951,75 @@
 		}
 	}
 
+	"lina_mana_drain_datadriven"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"				"ability_datadriven"
+		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_ATTACK"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityTextureName"	"lion_mana_drain"
 
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"mana_drain"				"2 4 6 8"
+			}
+		}
+		"Modifiers"
+		{
+			"modifier_lina_mana_drain_datadriven"
+			{
+				"Passive"	"1"
+				"IsHidden"	"1"
+
+				"OnAttackLanded"
+				{
+					"ApplyModifier"
+					{
+						"ModifierName"	"modifier_lina_mana_drain_regen_datadriven"
+						"Target" 		"CASTER"
+					}
+				}
+			}
+			"modifier_lina_mana_drain_regen_datadriven"
+			{
+				"IsBuff" "1"
+				"IsHidden" "1"
+				"Duration" "1"
+				"Attributes" "MODIFIER_ATTRIBUTE_MULTIPLE"
+
+				"EffectName"        "particles/generic_gameplay/generic_lifesteal_blue.vpcf"
+				"EffectAttachType"  "follow_origin"
+
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_MANA_REGEN_CONSTANT" "%mana_drain"
+				}
+			}
+		}
+	}
+
+
+	//-------------------------------------------------------------------------------------------------------------
+	//-------------------------------------------------------------------------------------------------------------
+	//-------------------------------------------------------------------------------------------------------------
+	//-------------------------------------------------------------------------------------------------------------
+	//-------------------------------------------------------------------------------------------------------------
+	//-------------------------------------------------------------------------------------------------------------
+	//-------------------------------------------------------------------------------------------------------------
+	//-------------------------------------------------------------------------------------------------------------
+	//-------------------------------------------------------------------------------------------------------------
+	//-------------------------------------------------------------------------------------------------------------
+	//-------------------------------------------------------------------------------------------------------------
+	//-------------------------------------------------------------------------------------------------------------
+	//-------------------------------------------------------------------------------------------------------------
+	//-------------------------------------------------------------------------------------------------------------
+	//-------------------------------------------------------------------------------------------------------------
 	//-------------------------------------------------------------------------------------------------------------
 	// CREEPS
 	//-------------------------------------------------------------------------------------------------------------
@@ -911,10 +1093,352 @@
 		}
 	}
 
+	"spider_poison_sting_datadriven"
+	{
+		"BaseClass"				"ability_datadriven"
+		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_ATTACK"
+		"AbilityTextureName"	"broodmother_poison_sting"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"damage"			"4"
+			}
+			"02"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"duration"		"3"
+			}
+		}
+
+		"Modifiers"
+		{
+			"modifier_spider_poison_sting_datadriven"
+			{
+				"Passive" "1"
+				"IsHidden"	"1"
+
+				"OnAttackLanded"
+				{
+					"ApplyModifier"
+					{
+						"ModifierName"	"modifier_spider_poison_sting_damage_datadriven"
+						"Target" 		"TARGET"
+						"Duration"		"%duration"
+					}
+				}
+			}
+
+			"modifier_spider_poison_sting_damage_datadriven"
+			{
+				"IsPurgable"		"1"
+				"IsDebuff"			"1"
+
+				"EffectName"	"particles/econ/items/witch_doctor/wd_ti8_immortal_head/wd_ti8_immortal_maledict_bubbles.vpcf"
+				"EffectAttachType"	"follow_overhead"
+
+				"ThinkInterval"  "1.0"
+				"OnIntervalThink"
+				{
+					"Damage"
+					{
+						"Target"		"TARGET"
+						"Type"			"DAMAGE_TYPE_MAGICAL"
+						"Damage"		"%damage"
+					}
+				}
+
+				"Properties"
+				{
+				    "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "-25"
+				}
+			}
+		}
+	}
+
+	"spider_explode_datadriven"
+	{
+		"BaseClass"				"ability_datadriven"
+		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityTextureName"	"alchemist_acid_spray"
+
+		"Modifiers"
+		{
+			"modifier_spider_explode_datadriven"
+			{
+				"Passive"	"1"
+				"IsHidden"	"1"
+
+				"OnDeath"
+				{
+
+					"FireEffect"
+					{
+						"EffectName"        "particles/units/heroes/hero_alchemist/alchemist_acid_spray_c.vpcf"
+						"EffectAttachType"  "attach_origin"
+						"Target"
+						{
+							"Center"	"CASTER"
+							"Flags"		"DOTA_UNIT_TARGET_FLAG_DEAD"
+						}
+					}
+					"ActOnTargets"
+					{
+						"Target"
+						{
+							"Center"  	"CASTER"
+							"Radius" 	"250"
+							"Teams" 	"DOTA_UNIT_TARGET_TEAM_ENEMY"
+							"Types" 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+						}
+
+						"Action"
+						{
+							"ApplyModifier"
+							{
+								"ModifierName"	"modifier_spider_explode_damage_datadriven"
+								"Target" 		"TARGET"
+								"Duration"		"10"
+							}
+						}
+					}
+				}
+			}
+			"modifier_spider_explode_damage_datadriven"
+			{
+				"IsPurgable"		"1"
+				"IsDebuff"			"1"
+
+				"EffectName"	"particles/econ/courier/courier_greevil_green/courier_greevil_green_ambient_b.vpcf"
+				"EffectAttachType"	"follow_overhead"
+
+				"ThinkInterval"  "1.0"
+				"OnIntervalThink"
+				{
+					"Damage"
+					{
+						"Target"		"TARGET"
+						"Type"			"DAMAGE_TYPE_MAGICAL"
+						"Damage"		"4"
+					}
+				}
+
+				"Properties"
+				{
+				    "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "-20"
+				}
+			}
+		}
+	}
+
+	"spider_mecha_explode_datadriven"
+	{
+		"BaseClass"				"ability_datadriven"
+		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityTextureName"	"elder_titan_echo_stomp"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"damage"			"50"
+			}
+			"02"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"radius"			"400"
+			}
+		}
+
+		"Modifiers"
+		{
+			"modifier_spider_mecha_explode_datadriven"
+			{
+				"Passive"	"1"
+				"IsHidden"	"1"
+
+				"OnDeath"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"ability/spider_abilities.lua"
+						"Function"		"SpiderMechaExplosion"
+					}
+				}
+			}
+		}
+	}
+
+	"spider_radioactive_datadriven"
+	{
+		"BaseClass"				"ability_datadriven"
+		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityTextureName"	"pugna_life_drain"
+
+		"Modifiers"
+		{
+			"modifier_spider_radioactive_datadriven"
+			{
+				"Passive"	"1"
+				"IsHidden"	"1"
+
+				"OnAttacked"
+				{
+					"ApplyModifier"
+					{
+						"ModifierName"	"modifier_spider_radioactive_target_datadriven"
+						"Target" 		"ATTACKER"
+						"Duration"		"2"
+					}
+				}
+			}
+			"modifier_spider_radioactive_target_datadriven"
+			{
+				"IsDebuff"	"1"
+				"IsPurgable"		"1"
+				"IsStunDebuff"		"1"
+				"OverrideAnimation"	"ACT_DOTA_DISABLED"
+
+				"EffectName"	"particles/econ/items/outworld_devourer/od_ti8/od_ti8_ambient_glow_blade_energy.vpcf"
+				"EffectAttachType"	"follow_origin"
+
+				"States"
+				{
+					"MODIFIER_STATE_STUNNED"		"MODIFIER_STATE_VALUE_ENABLED"
+				}
+
+				"ThinkInterval"  "0.2"
+				"OnIntervalThink"
+				{
+					"Damage"
+					{
+						"Target"		"TARGET"
+						"Type"			"DAMAGE_TYPE_MAGICAL"
+						"Damage"		"2"
+					}
+				}
+			}
+		}
+	}
+
+	"spider_brood_web_datadriven"
+	{
+		"BaseClass"				"ability_datadriven"
+		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityTextureName"	"broodmother_spin_web"
+		"AbilityCooldown"		"8"
+		"AbilityCastRange"		"1000"
+		"AoERadius"				"%radius"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"radius"			"800"
+			}
+			"02"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"delay"		"1.5"
+			}
+			"03"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"duration"		"5"
+			}
+			"04"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"movement_speed"		"-70"
+			}
+		}
+
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"ability/spider_abilities.lua"
+				"Function"		"SpiderBroodWeb"
+			}
+			"DelayedAction"
+			{
+				"Delay"     "%delay"
+				"Action"
+				{
+					"ActOnTargets"
+					{
+						"Target"
+						{
+							"Center"  	"POINT"
+							"Radius" 	"%radius"
+							"Teams" 	"DOTA_UNIT_TARGET_TEAM_ENEMY"
+							"Types" 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+						}
+
+						"Action"
+						{
+							"ApplyModifier"
+							{
+								"ModifierName"	"modifier_spider_brood_web_datadriven"
+								"Target" 		"TARGET"
+								"Duration"		"%duration"
+							}
+						}
+					}
+				}
+			}
+		}
+
+		"Modifiers"
+		{
+			"modifier_spider_brood_web_datadriven"
+			{
+				"IsPurgable"		"1"
+				"IsDebuff"			"1"
+
+				"EffectName"		"particles/dev/library/base_follow_absorigin_continuous.vpcf"
+				"EffectAttachType"	"follow_origin"
+
+				"Properties"
+				{
+				    "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "%movement_speed"
+				}
+			}
+		}
+	}
+
+	"spider_brood_summon_datadriven"
+	{
+		"BaseClass"       "ability_datadriven"
+		"AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityTextureName"      "broodmother_spawn_spiderlings_immortal"
+
+		"AbilityDuration"		"999"
+		"AbilityCastPoint"        "0"
+		"AbilityCooldown"       "3.5"
+
+		"OnSpellStart"
+		{
+			"SpawnUnit"
+			{
+				"UnitName"    "npc_unit_spider_broodling"
+				"Target"	"CASTER"
+				"Duration"  "%AbilityDuration"
+				"UnitCount" "1"
+				"UnitLimit" "99"
+				"GrantsGold"  "0"
+				"GrantsXP"    "0"
+				"SpawnRadius" "200"
+			}
+		}
+	}
+
 	"fire_elemental_aura_datadriven1"
 	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"				"ability_datadriven"
 		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
@@ -923,7 +1447,7 @@
 		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
 		"AbilityTextureName"	"invoker_exort"
 
-		"AOERadius"						"350"
+		"AOERadius"						"275"
 
 		"AbilitySpecial"
 		{
@@ -941,11 +1465,173 @@
 				"Passive"	"1"
 				"IsHidden"	"1"
 			    "Aura" "modifier_fire_elemental_aura_damage_datadriven1"
-			    "Aura_Radius" "350"
+			    "Aura_Radius" "275"
 			    "Aura_Teams" "DOTA_UNIT_TARGET_TEAM_ENEMY"
 			    "Aura_Types" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 			}
 			"modifier_fire_elemental_aura_damage_datadriven1"
+			{
+				"IsDebuff"	"1"
+				"IsPurgable" "0"
+
+				"EffectName"	"particles/battlepass/healing_fire_torch_glow.vpcf"
+				"EffectAttachType"	"follow_overhead"
+
+				"ThinkInterval"	"1.0"
+				"OnIntervalThink"
+				{
+					"Damage"
+					{
+						"Target"		"TARGET"
+						"Type"			"DAMAGE_TYPE_MAGICAL"
+						"Damage"		"%damage"
+					}
+				}
+			}
+		}
+	}
+
+	"fire_elemental_aura_datadriven2"
+	{
+		"BaseClass"				"ability_datadriven"
+		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityTextureName"	"invoker_exort"
+
+		"AOERadius"						"275"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"damage"					"10"
+			}
+		}
+
+		"Modifiers"
+		{
+			"modifier_fire_elemental_aura_datadriven2"
+			{
+				"Passive"	"1"
+				"IsHidden"	"1"
+			    "Aura" "modifier_fire_elemental_aura_damage_datadriven2"
+			    "Aura_Radius" "275"
+			    "Aura_Teams" "DOTA_UNIT_TARGET_TEAM_ENEMY"
+			    "Aura_Types" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+			}
+			"modifier_fire_elemental_aura_damage_datadriven2"
+			{
+				"IsDebuff"	"1"
+				"IsPurgable" "0"
+
+				"EffectName"	"particles/battlepass/healing_fire_torch_glow.vpcf"
+				"EffectAttachType"	"follow_overhead"
+
+				"ThinkInterval"	"1.0"
+				"OnIntervalThink"
+				{
+					"Damage"
+					{
+						"Target"		"TARGET"
+						"Type"			"DAMAGE_TYPE_MAGICAL"
+						"Damage"		"%damage"
+					}
+				}
+			}
+		}
+	}
+
+	"fire_elemental_aura_datadriven3"
+	{
+		"BaseClass"				"ability_datadriven"
+		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityTextureName"	"invoker_exort"
+
+		"AOERadius"						"275"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"damage"					"15"
+			}
+		}
+
+		"Modifiers"
+		{
+			"modifier_fire_elemental_aura_datadriven3"
+			{
+				"Passive"	"1"
+				"IsHidden"	"1"
+			    "Aura" "modifier_fire_elemental_aura_damage_datadriven3"
+			    "Aura_Radius" "275"
+			    "Aura_Teams" "DOTA_UNIT_TARGET_TEAM_ENEMY"
+			    "Aura_Types" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+			}
+			"modifier_fire_elemental_aura_damage_datadriven3"
+			{
+				"IsDebuff"	"1"
+				"IsPurgable" "0"
+
+				"EffectName"	"particles/battlepass/healing_fire_torch_glow.vpcf"
+				"EffectAttachType"	"follow_overhead"
+
+				"ThinkInterval"	"1.0"
+				"OnIntervalThink"
+				{
+					"Damage"
+					{
+						"Target"		"TARGET"
+						"Type"			"DAMAGE_TYPE_MAGICAL"
+						"Damage"		"%damage"
+					}
+				}
+			}
+		}
+	}
+
+	"fire_elemental_aura_datadriven4"
+	{
+		"BaseClass"				"ability_datadriven"
+		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityTextureName"	"invoker_exort"
+
+		"AOERadius"						"275"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"damage"					"20"
+			}
+		}
+
+		"Modifiers"
+		{
+			"modifier_fire_elemental_aura_datadriven4"
+			{
+				"Passive"	"1"
+				"IsHidden"	"1"
+			    "Aura" "modifier_fire_elemental_aura_damage_datadriven4"
+			    "Aura_Radius" "275"
+			    "Aura_Teams" "DOTA_UNIT_TARGET_TEAM_ENEMY"
+			    "Aura_Types" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+			}
+			"modifier_fire_elemental_aura_damage_datadriven4"
 			{
 				"IsDebuff"	"1"
 				"IsPurgable" "0"
