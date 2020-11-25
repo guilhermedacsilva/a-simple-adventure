@@ -65,7 +65,7 @@ function SimpleAdventure:LevelUp(scene)
         if not hero:IsAlive() then
             hero:RespawnUnit()
         end
-        hero:ModifyGold(GOLD_TABLE[scence], true, 0)
+        hero:ModifyGold(GOLD_TABLE[scene], true, 0)
         hero:AddExperience(100, 0, false, false)
     end
     self:RefreshAllUnits()

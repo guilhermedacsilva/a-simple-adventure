@@ -55,4 +55,5 @@ for heroKey, hero in pairs(HEROES) do
 end
 
 hero = PlayerResource:GetSelectedHeroEntity( 0 )
-hero:ForceKill(false)
+DEBUG_REAL_HERO = hero
+--hero:ForceKill(false)

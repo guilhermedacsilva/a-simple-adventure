@@ -1,6 +1,6 @@
 function SpiderMechaExplosion(keys)
-    local delay = 2.5
     local caster = keys.caster
+    local delay = keys.ability:GetSpecialValueFor("delay")
     local damage = keys.ability:GetSpecialValueFor("damage")
     local radius = keys.ability:GetSpecialValueFor("radius")
 

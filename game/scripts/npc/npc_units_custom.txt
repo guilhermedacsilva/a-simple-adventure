@@ -381,7 +381,7 @@
 		"AttackAcquisitionRange"  "450"
 		"AttackRange"       "150"
 
-		"StatusHealth"        "1200"
+		"StatusHealth"        "1300"
         "ArmorPhysical"     "2"
 
 		"RingRadius"              "180"

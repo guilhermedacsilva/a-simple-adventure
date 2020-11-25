@@ -1251,6 +1251,11 @@
 				"var_type"			"FIELD_INTEGER"
 				"radius"			"400"
 			}
+			"03"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"delay"				"1.5"
+			}
 		}
 
 		"Modifiers"

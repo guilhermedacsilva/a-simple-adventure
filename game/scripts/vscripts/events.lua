@@ -47,23 +47,6 @@ function GameMode:OnEntityHurt(keys)
   end
 end
 
--- An item was picked up off the ground
-function GameMode:OnItemPickedUp(keys)
-  DebugPrint( '[BAREBONES] OnItemPickedUp' )
-  DebugPrintTable(keys)
-
-  local unitEntity = nil
-  if keys.UnitEntitIndex then
-    unitEntity = EntIndexToHScript(keys.UnitEntitIndex)
-  elseif keys.HeroEntityIndex then
-    unitEntity = EntIndexToHScript(keys.HeroEntityIndex)
-  end
-
-  local itemEntity = EntIndexToHScript(keys.ItemEntityIndex)
-  local player = PlayerResource:GetPlayer(keys.PlayerID)
-  local itemname = keys.itemname
-end
-
 -- A player has reconnected to the game.  This function can be used to repaint Player-based particles or change
 -- state as necessary
 function GameMode:OnPlayerReconnect(keys)
@@ -71,21 +54,60 @@ function GameMode:OnPlayerReconnect(keys)
   DebugPrintTable(keys)
 end
 
--- An item was purchased by a player
-function GameMode:OnItemPurchased( keys )
-  DebugPrint( '[BAREBONES] OnItemPurchased' )
+-- An item was picked up off the ground
+function GameMode:OnItemPickedUp(keys)
+  DebugPrint( '[BAREBONES] OnItemPickedUp' )
   DebugPrintTable(keys)
 
-  -- The playerID of the hero who is buying something
+  local hero = nil
+  if keys.UnitEntitIndex then
+    hero = EntIndexToHScript(keys.UnitEntitIndex)
+  elseif keys.HeroEntityIndex then
+    hero = EntIndexToHScript(keys.HeroEntityIndex)
+  end
+
+  --local itemEntity = EntIndexToHScript(keys.ItemEntityIndex)
+  --local player = PlayerResource:GetPlayer(keys.PlayerID)
+  --local itemName = keys.itemname
+
+  self:CheckItemsRestrictions(keys.itemname, hero)
+end
+
+function GameMode:OnItemPurchased( keys )
   local plyID = keys.PlayerID
   if not plyID then return end
 
-  -- The name of the item purchased
-  local itemName = keys.itemname
+  --local itemName = keys.itemname
+  --local itemcost = keys.itemcost
+  self:CheckItemsRestrictions(keys.itemname, PlayerResource:GetSelectedHeroEntity(plyID))
+end
 
-  -- The cost of the item purchased
-  local itemcost = keys.itemcost
+function GameMode:CheckItemsRestrictions(itemName, hero)
+  -- ===========================
+  -- ===========================
+  -- ===========================
+  -- SE TENTAR COMPRAR MAIS DE 3 VEZES APARECE O DEMÔNIO
 
+  local itemClass = SHOP_ITEM_CLASS[itemName]
+  if not itemClass then return end
+
+  local qnt = 0
+  if hero ~= nil then
+    for i=0,14 do
+      local item = hero:GetItemInSlot(i)
+      if item ~= nil and SHOP_ITEM_CLASS[item:GetAbilityName()] == itemClass then
+        qnt = qnt + 1
+      end
+    end
+    if qnt > 1 then
+      local item = hero:FindItemInInventory(itemName)
+      if item ~= nil then
+        hero:ModifyGold(item:GetCost(), true, 0)
+        hero:TakeItem(item)
+        Notifications:Bottom(hero:GetPlayerOwner(), {text="<font color='#FA3009'>YOU CANNOT HAVE MORE THAN ONE</font>", duration=5.0})
+      end
+    end
+  end
 end
 
 -- An ability was used by a player

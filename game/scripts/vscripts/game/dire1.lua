@@ -69,6 +69,7 @@ function Dire1:DebugScene()
         hero:SetOrigin(Vector(moveTo.x + pos * 100, moveTo.y - 150, 128))
         pos = pos + 1
     end
+    DEBUG_REAL_HERO:SetOrigin(Vector(moveTo.x + pos * 100, moveTo.y - 150, 128))
 
     self:Init()
 end

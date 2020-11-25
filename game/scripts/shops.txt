@@ -16,11 +16,20 @@
         "item"    "item_claws_datadriven"
         "item"    "item_claymore_datadriven"
         "item"    "item_axe_datadriven"
+        "item"    "item_javelin_datadriven"
+        "item"    "item_demon_edge_datadriven"
+        "item"    "item_reaver_datadriven"
+        "item"    "item_dragon_lance_datadriven"
     }
 
     "misc" // mid right
     {
         "item"    "item_wood_shield_datadriven"
+        "item"    "item_chainmail_datadriven"
+        "item"    "item_iron_shield_datadriven"
+        "item"    "item_iron_helm_datadriven"
+        "item"    "item_platemail_datadriven"
+        "item"    "item_buckler_datadriven"
     }
 
     // ==========================================================================

@@ -271,7 +271,7 @@
         }
         "Modifiers"
         {
-            "modifier_item_claws_datadriven"
+            "modifier_item_claymore_datadriven"
             {
                 "Passive"           "1"
                 "IsHidden"          "1"
@@ -336,14 +336,14 @@
         }
     }
 
-    "item_claymore_datadriven"
+    "item_javelin_datadriven"
     {
         "BaseClass"                     "item_datadriven"
         "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
         "Model"                         "models/props_gameplay/red_box.vmdl"
         "Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
 
-        "AbilityTextureName"            "claymore"
+        "AbilityTextureName"            "javelin"
         "ItemCost"                      "200"
 
         "AbilitySpecial"
@@ -351,12 +351,104 @@
             "01"
             {
                 "var_type"              "FIELD_INTEGER"
-                "bonus_attack"        "12"
+                "bonus_attack"        "5"
+            }
+            "02"
+            {
+                "var_type"                  "FIELD_INTEGER"
+                "crit_mult"                 "175"
+            }
+            "03"
+            {
+                "var_type"                  "FIELD_INTEGER"
+                "crit_chance"               "17"
             }
         }
         "Modifiers"
         {
-            "modifier_item_claws_datadriven"
+            "modifier_item_javelin_datadriven"
+            {
+                "Passive"           "1"
+                "IsHidden"          "1"
+                "Attributes"        "MODIFIER_ATTRIBUTE_MULTIPLE"
+                "Properties"
+                {
+                    "MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE"        "%bonus_attack"
+                }
+                "OnAttackStart"
+                {
+                    "RemoveModifier"
+                    {
+                        "ModifierName"  "modifier_item_javelin_crit_datadriven"
+                        "Target"        "CASTER"
+                    }
+
+                    "Random"
+                    {
+                        "Chance" "%crit_chance"
+                        "PseudoRandom"  "DOTA_PSEUDO_RANDOM_SNIPER_HEADSHOT"
+                        "OnSuccess"
+                        {
+                            "FireSound"
+                            {
+                                "EffectName"    "Adventure.Crit"
+                                "Target"        "CASTER"
+                            }
+
+                            "ApplyModifier"
+                            {
+                                "ModifierName"  "modifier_item_javelin_crit_datadriven"
+                                "Target"        "CASTER"
+                            }
+                        }
+                    }
+                }
+            }
+            "modifier_item_javelin_crit_datadriven"
+            {
+                "IsHidden"  "1"
+                "Properties"
+                {
+                    "MODIFIER_PROPERTY_PREATTACK_CRITICALSTRIKE" "%crit_mult"
+                }
+
+                "OnAttackLanded"
+                {
+                    "RemoveModifier"
+                    {
+                        "ModifierName"  "modifier_item_javelin_crit_datadriven"
+                        "Target"        "CASTER"
+                    }
+                }
+            }
+        }
+    }
+
+    // ================================================
+    // ======= WEAPONS line 2
+    // ================================================
+
+    "item_demon_edge_datadriven"
+    {
+        "BaseClass"                     "item_datadriven"
+        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+        "Model"                         "models/props_gameplay/red_box.vmdl"
+        "Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
+
+        "AbilityTextureName"            "demon_edge"
+        "ItemCost"                      "300"
+
+        "AbilitySpecial"
+        {
+            "01"
+            {
+                "var_type"              "FIELD_INTEGER"
+                "bonus_attack"        "25"
+            }
+        }
+        "Modifiers"
+        {
+            "modifier_item_demon_edge_datadriven"
             {
                 "Passive"           "1"
                 "IsHidden"          "1"
@@ -368,6 +460,148 @@
             }
         }
     }
+
+    "item_reaver_datadriven"
+    {
+        "BaseClass"                     "item_datadriven"
+        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+        "Model"                         "models/props_gameplay/red_box.vmdl"
+        "Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
+
+        "AbilityTextureName"            "reaver"
+        "ItemCost"                      "300"
+
+        "AbilitySpecial"
+        {
+            "01"
+            {
+                "var_type"              "FIELD_INTEGER"
+                "bonus_attack"        "10"
+            }
+            "02"
+            {
+                "var_type"              "FIELD_INTEGER"
+                "cleave_damage_percent"        "20"
+            }
+            "03"
+            {
+                "var_type"              "FIELD_INTEGER"
+                "cleave_radius"        "275"
+            }
+        }
+        "Modifiers"
+        {
+            "modifier_item_reaver_datadriven"
+            {
+                "Passive"           "1"
+                "IsHidden"          "1"
+                "Attributes"        "MODIFIER_ATTRIBUTE_MULTIPLE"
+                "Properties"
+                {
+                    "MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE"        "%bonus_attack"
+                }
+                "OnAttackLanded"
+                {
+                    "CleaveAttack"
+                    {
+                        "CleavePercent"     "%cleave_damage_percent"
+                        "CleaveRadius"      "%cleave_radius"
+                        "CleaveEffect"      "particles/items_fx/battlefury_cleave.vpcf"
+                    }
+                }
+            }
+        }
+    }
+
+    "item_dragon_lance_datadriven"
+    {
+        "BaseClass"                     "item_datadriven"
+        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+        "Model"                         "models/props_gameplay/red_box.vmdl"
+        "Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
+
+        "AbilityTextureName"            "dragon_lance"
+        "ItemCost"                      "300"
+
+        "AbilitySpecial"
+        {
+            "01"
+            {
+                "var_type"              "FIELD_INTEGER"
+                "bonus_attack"        "10"
+            }
+            "02"
+            {
+                "var_type"                  "FIELD_INTEGER"
+                "crit_mult"                 "250"
+            }
+            "03"
+            {
+                "var_type"                  "FIELD_INTEGER"
+                "crit_chance"               "17"
+            }
+        }
+        "Modifiers"
+        {
+            "modifier_item_dragon_lance_datadriven"
+            {
+                "Passive"           "1"
+                "IsHidden"          "1"
+                "Attributes"        "MODIFIER_ATTRIBUTE_MULTIPLE"
+                "Properties"
+                {
+                    "MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE"        "%bonus_attack"
+                }
+                "OnAttackStart"
+                {
+                    "RemoveModifier"
+                    {
+                        "ModifierName"  "modifier_item_dragon_lance_crit_datadriven"
+                        "Target"        "CASTER"
+                    }
+
+                    "Random"
+                    {
+                        "Chance" "%crit_chance"
+                        "PseudoRandom"  "DOTA_PSEUDO_RANDOM_SNIPER_HEADSHOT"
+                        "OnSuccess"
+                        {
+                            "FireSound"
+                            {
+                                "EffectName"    "Adventure.Crit"
+                                "Target"        "CASTER"
+                            }
+
+                            "ApplyModifier"
+                            {
+                                "ModifierName"  "modifier_item_dragon_lance_crit_datadriven"
+                                "Target"        "CASTER"
+                            }
+                        }
+                    }
+                }
+            }
+
+            "modifier_item_dragon_lance_crit_datadriven"
+            {
+                "IsHidden"  "1"
+                "Properties"
+                {
+                    "MODIFIER_PROPERTY_PREATTACK_CRITICALSTRIKE" "%crit_mult"
+                }
+
+                "OnAttackLanded"
+                {
+                    "RemoveModifier"
+                    {
+                        "ModifierName"  "modifier_item_dragon_lance_crit_datadriven"
+                        "Target"        "CASTER"
+                    }
+                }
+            }
+        }
+    }
+
 
     // ==================================================================
     // ==================================================================
@@ -412,5 +646,226 @@
         }
     }
 
+    "item_chainmail_datadriven"
+    {
+        "BaseClass"                     "item_datadriven"
+        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+        "Model"                         "models/props_gameplay/red_box.vmdl"
+        "Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
+
+        "AbilityTextureName"            "chainmail"
+        "ItemCost"                      "200"
+
+        "AbilitySpecial"
+        {
+            "01"
+            {
+                "var_type"              "FIELD_INTEGER"
+                "bonus_armor"        "4"
+            }
+        }
+        "Modifiers"
+        {
+            "modifier_item_wood_shield_datadriven"
+            {
+                "Passive"           "1"
+                "IsHidden"          "1"
+                "Attributes"        "MODIFIER_ATTRIBUTE_MULTIPLE"
+                "Properties"
+                {
+                    "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"        "%bonus_armor"
+                }
+            }
+        }
+    }
+
+    "item_iron_shield_datadriven"
+    {
+        "BaseClass"                     "item_datadriven"
+        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+        "Model"                         "models/props_gameplay/red_box.vmdl"
+        "Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
+
+        "AbilityTextureName"            "poor_mans_shield"
+        "ItemCost"                      "200"
+
+        "AbilitySpecial"
+        {
+            "01"
+            {
+                "var_type"              "FIELD_INTEGER"
+                "bonus_armor"        "2"
+            }
+            "02"
+            {
+                "var_type"              "FIELD_INTEGER"
+                "magic_resistance"        "15"
+            }
+        }
+        "Modifiers"
+        {
+            "modifier_item_iron_shield_datadriven"
+            {
+                "Passive"           "1"
+                "IsHidden"          "1"
+                "Attributes"        "MODIFIER_ATTRIBUTE_MULTIPLE"
+                "Properties"
+                {
+                    "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"        "%bonus_armor"
+                    "MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS"    "%magic_resistance"
+                }
+            }
+        }
+    }
+
+    "item_iron_helm_datadriven"
+    {
+        "BaseClass"                     "item_datadriven"
+        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+        "Model"                         "models/props_gameplay/red_box.vmdl"
+        "Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
+
+        "AbilityTextureName"            "helm_of_iron_will"
+        "ItemCost"                      "200"
+
+        "AbilitySpecial"
+        {
+            "01"
+            {
+                "var_type"              "FIELD_INTEGER"
+                "def_chance"        "50"
+            }
+            "02"
+            {
+                "var_type"              "FIELD_INTEGER"
+                "def_amount"        "10"
+            }
+            "03"
+            {
+                "var_type"              "FIELD_INTEGER"
+                "mana"                  "25"
+            }
+        }
+        "Modifiers"
+        {
+            "modifier_item_iron_helm_datadriven"
+            {
+                "Passive"           "1"
+                "IsHidden"          "1"
+                "Attributes"        "MODIFIER_ATTRIBUTE_MULTIPLE"
+                "Properties"
+                {
+                    "MODIFIER_PROPERTY_MANA_BONUS"        "%mana"
+                }
+
+                "OnAttacked"
+                {
+                    "RemoveModifier"
+                    {
+                        "ModifierName"  "modifier_item_iron_helm_def_datadriven"
+                        "Target"        "CASTER"
+                    }
+
+                    "Random"
+                    {
+                        "Chance" "%def_chance"
+                        "OnSuccess"
+                        {
+                            "ApplyModifier"
+                            {
+                                "ModifierName"  "modifier_item_iron_helm_def_datadriven"
+                                "Target"        "CASTER"
+                            }
+                        }
+                    }
+                }
+            }
+
+            "modifier_item_iron_helm_def_datadriven"
+            {
+                "IsHidden"          "1"
+                "Properties"
+                {
+                    "MODIFIER_PROPERTY_PHYSICAL_CONSTANT_BLOCK" "%def_amount"
+                }
+            }
+        }
+    }
+
+    // ================================================
+    // ======= ARMOR line 2
+    // ================================================
+
+    "item_platemail_datadriven"
+    {
+        "BaseClass"                     "item_datadriven"
+        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+        "Model"                         "models/props_gameplay/red_box.vmdl"
+        "Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
+
+        "AbilityTextureName"            "platemail"
+        "ItemCost"                      "300"
+
+        "AbilitySpecial"
+        {
+            "01"
+            {
+                "var_type"              "FIELD_INTEGER"
+                "bonus_armor"        "6"
+            }
+        }
+        "Modifiers"
+        {
+            "modifier_item_wood_shield_datadriven"
+            {
+                "Passive"           "1"
+                "IsHidden"          "1"
+                "Attributes"        "MODIFIER_ATTRIBUTE_MULTIPLE"
+                "Properties"
+                {
+                    "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"        "%bonus_armor"
+                }
+            }
+        }
+    }
+
+    "item_buckler_datadriven"
+    {
+        "BaseClass"                     "item_datadriven"
+        "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+        "Model"                         "models/props_gameplay/red_box.vmdl"
+        "Effect"                        "particles/generic_gameplay/dropped_item.vpcf"
+
+        "AbilityTextureName"            "buckler_active"
+        "ItemCost"                      "300"
+
+        "AbilitySpecial"
+        {
+            "01"
+            {
+                "var_type"              "FIELD_INTEGER"
+                "bonus_armor"        "3"
+            }
+            "02"
+            {
+                "var_type"              "FIELD_INTEGER"
+                "magic_resistance"        "30"
+            }
+        }
+        "Modifiers"
+        {
+            "modifier_item_buckler_datadriven"
+            {
+                "Passive"           "1"
+                "IsHidden"          "1"
+                "Attributes"        "MODIFIER_ATTRIBUTE_MULTIPLE"
+                "Properties"
+                {
+                    "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"        "%bonus_armor"
+                    "MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS"    "%magic_resistance"
+                }
+            }
+        }
+    }
 
 }

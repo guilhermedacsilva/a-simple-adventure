@@ -109,6 +109,7 @@ function Floresta2:DebugScene()
         hero:SetOrigin(Vector(moveTo.x + pos * 100, moveTo.y - 150, 128))
         pos = pos + 1
     end
+    DEBUG_REAL_HERO:SetOrigin(moveTo)
 
     self:Init()
 end

@@ -20,6 +20,34 @@ for i=2,20 do
   GOLD_TABLE[i] = GOLD_TABLE[i-1] * 2
 end
 
+-- USED FILTER ITEMS
+SHOP_CLASS_ITEM = {
+    weapons = {
+        "item_claws_datadriven",
+        "item_claymore_datadriven",
+        "item_axe_datadriven",
+        "item_javelin_datadriven",
+        "item_demon_edge_datadriven",
+        "item_reaver_datadriven",
+        "item_dragon_lance_datadriven"
+    },
+    armors = {
+        "item_wood_shield_datadriven",
+        "item_chainmail_datadriven",
+        "item_iron_shield_datadriven",
+        "item_iron_helm_datadriven",
+        "item_platemail_datadriven",
+        "item_buckler_datadriven"
+    }
+}
+SHOP_ITEM_CLASS = {}
+for c,itemList in pairs(SHOP_CLASS_ITEM) do
+    for _,item in pairs(itemList) do
+        SHOP_ITEM_CLASS[item] = c
+    end
+end
+
+
 HERO_SELECTION_TIME = 30.0              -- How long should we let people select their hero?
 PRE_GAME_TIME = 1.0                    -- How long after people select their heroes should the horn blow and the game start?
 POST_GAME_TIME = 60.0                   -- How long should we let people look at the scoreboard before closing the server automatically?
