@@ -5,8 +5,11 @@
 "CustomHeroList"
 {
   "npc_dota_hero_mars" "1"
+  "npc_dota_hero_dragon_knight" "1"
   "npc_dota_hero_lina" "1"
   "npc_dota_hero_windrunner" "1"
+
+  "npc_dota_hero_juggernaut" "0"
 
   "npc_dota_hero_ancient_apparition" "0"
   "npc_dota_hero_antimage" "0"
@@ -18,7 +21,6 @@
   "npc_dota_hero_crystal_maiden" "0"
   "npc_dota_hero_dark_seer" "0"
   "npc_dota_hero_dazzle"  "0"
-  "npc_dota_hero_dragon_knight" "0"
   "npc_dota_hero_doom_bringer" "0"
   "npc_dota_hero_drow_ranger" "0"
   "npc_dota_hero_earthshaker" "0"
@@ -26,7 +28,6 @@
   "npc_dota_hero_enigma" "0"
   "npc_dota_hero_faceless_void" "0"
   "npc_dota_hero_furion" "0"
-  "npc_dota_hero_juggernaut" "0"
   "npc_dota_hero_kunkka" "0"
   "npc_dota_hero_leshrac" "0"
   "npc_dota_hero_lich" "0"

@@ -99,15 +99,11 @@
 
 	"mars_warcry_datadriven"
 	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"				"ability_datadriven"
 		"MaxLevel" 						"4"
 		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"AbilityTextureName"	"mars_arena_of_blood"
 
-		// Precache
-		//-------------------------------------------------------------------------------------------------------------
 		"precache"
 		{
 			"soundfile"			"soundevents/game_sounds_heroes/game_sounds_sven.vsndevts"
@@ -115,21 +111,11 @@
 			"particle"			"particles/units/heroes/hero_sven/sven_warcry_buff.vpcf"
 		}
 
-		// Casting
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityCastPoint"				"0.0"
-
-		// Time
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityCooldown"				"30"
-		"AbilityDuration"				"10 12 14 16"
-
-		// Cost
-		//-------------------------------------------------------------------------------------------------------------
+		"AbilityDuration"				"13 16 19 22"
 		"AbilityManaCost"				"50 70 90 110"
 
-		// Special
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilitySpecial"
 		{
 			"01"
@@ -210,43 +196,74 @@
 		}
 	}
 
-	"mars_armor_datadriven"
+	"mars_shield_datadriven"
 	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"				"ability_datadriven"
 		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"AbilityTextureName"	"mars_bulwark"
 
-		// Special
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"					"FIELD_INTEGER"
-				"bonus_armor"				"1 2 3 4"
-			}
-		}
-		"Modifiers"
-		{
-			"modifier_dragon_blood_datadriven"
-			{
-				"Passive"	"1"
-				"IsHidden"	"1"
+        {
+            "01"
+            {
+                "var_type"              "FIELD_INTEGER"
+                "def_chance"        "12 15 18 21"
+            }
+            "02"
+            {
+                "var_type"              "FIELD_FLOAT"
+                "def_damage"        "99999"
+            }
+        }
+        "Modifiers"
+        {
+            "modifier_mars_shield_datadriven"
+            {
+                "Passive"           "1"
+                "IsHidden"          "1"
+                "Attributes"        "MODIFIER_ATTRIBUTE_MULTIPLE"
+                "Properties"
+                {
+                    "MODIFIER_PROPERTY_MANA_BONUS"        "%mana"
+                }
 
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"	"%bonus_armor"
-				}
-			}
-		}
+                "OnAttacked"
+                {
+                    "RemoveModifier"
+                    {
+                        "ModifierName"  "modifier_mars_shield_block_datadriven"
+                        "Target"        "CASTER"
+                    }
+
+                    "Random"
+                    {
+                        "Chance" "%def_chance"
+                        "OnSuccess"
+                        {
+                            "ApplyModifier"
+                            {
+                                "ModifierName"  "modifier_mars_shield_block_datadriven"
+                                "Target"        "CASTER"
+                            }
+                        }
+                    }
+                }
+            }
+
+            "modifier_mars_shield_block_datadriven"
+            {
+                "IsHidden"          "1"
+                "Properties"
+                {
+                    "MODIFIER_PROPERTY_PHYSICAL_CONSTANT_BLOCK" "%def_damage"
+                }
+            }
+        }
+
 	}
 
 	"mars_battle_victory_datadriven"
 	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"				"ability_datadriven"
 		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
@@ -290,6 +307,161 @@
 		}
 	}
 
+	//-------------------------------------------------------------------------------------------------------------
+	// DRAGON KNIGHT
+	//-------------------------------------------------------------------------------------------------------------
+	"dk_breathe_fire_datadriven"
+	{
+		"BaseClass"				"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_DIRECTIONAL | DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"AbilityTextureName"			"dragon_knight_breathe_fire"
+
+		"precache"
+		{
+			"soundfile"		"soundevents/game_sounds_heroes/game_sounds_dragon_knight.vsndevts"
+			"particle"		"particles/units/heroes/hero_dragon_knight/dragon_knight_breathe_fire.vpcf"
+		}
+
+		"AbilityCastRange"				"500"
+		"AbilityCooldown"				"10"
+		"AbilityDamage"					"30 40 50 60"
+		"AbilityManaCost"				"50 60 70 80"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"start_radius"			"150 150 150 150"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"end_radius"			"250 250 250 250"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"range"					"500 500 500 500"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"speed"					"1050"
+			}
+		}
+
+		"OnSpellStart"
+		{
+			"LinearProjectile"
+			{
+				"Target" "POINT"
+				"EffectName" "particles/units/heroes/hero_dragon_knight/dragon_knight_breathe_fire.vpcf"
+				"MoveSpeed" "%speed"
+				"StartRadius" "%start_radius"
+				"StartPosition" "attach_origin"
+				"EndRadius" "%end_radius"
+				"FixedDistance" "%range"
+				"TargetTeams" "DOTA_UNIT_TARGET_TEAM_ENEMY"
+				"TargetTypes" "DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO | DOTA_UNITY_TARGET_MECHANICAL"
+				"TargetFlags" "DOTA_UNIT_TARGET_FLAG_NONE"
+				"HasFrontalCone" "1"
+				"ProvidesVision" "0"
+			}
+			"FireSound"
+			{
+				"EffectName" "Hero_DragonKnight.BreathFire"
+				"Target" "CASTER"
+			}
+		}
+
+		"OnProjectileHitUnit"
+		{
+			"DeleteOnHit" "0"
+
+			"Damage"
+			{
+				"Target" "TARGET"
+				"Type" "DAMAGE_TYPE_MAGICAL"
+				"Damage" "%AbilityDamage"
+			}
+
+			"Heal"
+			{
+				"Target"        "CASTER"
+				"HealAmount"	"%AbilityDamage"
+			}
+		}
+	}
+
+	"dk_armor_datadriven"
+	{
+		"BaseClass"				"ability_datadriven"
+		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityTextureName"	"dragon_knight_dragon_tail"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"bonus_armor"				"4 8 12 16"
+			}
+		}
+		"Modifiers"
+		{
+			"modifier_dk_armor_datadriven"
+			{
+				"Passive"	"1"
+				"IsHidden"	"1"
+
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"	"%bonus_armor"
+				}
+			}
+		}
+	}
+
+	"dk_sword_datadriven"
+	{
+		"BaseClass"				"ability_datadriven"
+		"AbilityBehavior"		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"AbilityTextureName"	"juggernaut_blade_dance_arcana"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"bonus_damage"				"5 10 15 20"
+			}
+		}
+		"Modifiers"
+		{
+			"modifier_dk_sword_datadriven"
+			{
+				"Passive"	"1"
+				"IsHidden"	"1"
+
+				"OnAttackLanded"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"ability/dk_abilities.lua"
+						"Function"		"DkWill"
+					}
+				}
+			}
+		}
+	}
 
 
 	//-------------------------------------------------------------------------------------------------------------

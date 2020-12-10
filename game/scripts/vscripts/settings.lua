@@ -4,7 +4,7 @@ if DEBUG_HEROES then
     DEBUG_QNT_HEROES = 3
     FORCE_PICKED_HERO = "npc_dota_hero_mars"
     STARTING_GOLD = 99999
-    DEBUG_START_SCENE = 3
+    DEBUG_START_SCENE = 2
 else
     STARTING_GOLD = 0
 end

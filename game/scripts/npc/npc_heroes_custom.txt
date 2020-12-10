@@ -7,16 +7,93 @@
     // 1 agi = 1 atk spd + 0.17 armor
     // 1 int = 12 MP + 0.05 MP Regen
 
-    "npc_dota_hero_mars" // warrior
+    "npc_dota_hero_mars"
     {
-        "override_hero"             "npc_dota_hero_mars"            // Hero to override
+        "override_hero"             "npc_dota_hero_mars"
         "AttackDamageMin"       "25"
         "AttackDamageMax"       "25"
         "AttackRate"        "2"
         "ArmorPhysical"     "0"
         "MagicalResistance"       "0"
-        // "AttackAnimationPoint"      "0.40000"
         "StatusHealth"              "100"
+        "StatusHealthRegen"         "0"
+        "StatusMana"                "100"
+        "StatusManaRegen"           "0.0"
+        "AttackRange"       "250"
+        "Ability1"      "mars_spear_datadriven"
+        "Ability2"      "mars_warcry_datadriven"
+        "Ability3"      "mars_shield_datadriven"
+        "Ability4"      "mars_battle_victory_datadriven"
+        "Ability5"      ""
+        "Ability6"      ""
+        "Ability10"     ""
+        "Ability11"     ""
+        "Ability12"     ""
+        "Ability13"     ""
+        "Ability14"     ""
+        "Ability15"     ""
+        "Ability16"     ""
+        "Ability17"     ""
+        "AttributePrimary"      "DOTA_ATTRIBUTE_STRENGTH"
+        "AttributeBaseStrength"     "0"
+        "AttributeStrengthGain"     "3" // 600 hp
+        "AttributeBaseAgility"      "0"
+        "AttributeAgilityGain"      "0"
+        "AttributeBaseIntelligence"     "0"
+        "AttributeIntelligenceGain"     "1" // 120 mp
+        "MovementSpeed"     "300"
+        "VisionDaytimeRange"        "550"
+        "VisionNighttimeRange"      "450"
+    }
+
+    "npc_dota_hero_dragon_knight"
+    {
+        "override_hero"             "npc_dota_hero_dragon_knight"
+        "AttackDamageMin"       "25"
+        "AttackDamageMax"       "25"
+        "AttackRate"        "2"
+        "ArmorPhysical"     "0"
+        "MagicalResistance"       "0"
+        "StatusHealth"              "90"
+        "StatusHealthRegen"         "0"
+        "StatusMana"                "100"
+        "StatusManaRegen"           "0.0"
+        "AttackRange"       "250"
+        "Ability1"      "dk_breathe_fire_datadriven"
+        "Ability2"      "dk_sword_datadriven"
+        "Ability3"      "dk_armor_datadriven"
+        "Ability4"      ""
+        "Ability5"      ""
+        "Ability6"      ""
+        "Ability10"     ""
+        "Ability11"     ""
+        "Ability12"     ""
+        "Ability13"     ""
+        "Ability14"     ""
+        "Ability15"     ""
+        "Ability16"     ""
+        "Ability17"     ""
+        "AttributePrimary"      "DOTA_ATTRIBUTE_STRENGTH"
+        "AttributeBaseStrength"     "0"
+        "AttributeStrengthGain"     "2.75" // 550 hp
+        "AttributeBaseAgility"      "0"
+        "AttributeAgilityGain"      "0"
+        "AttributeBaseIntelligence"     "0"
+        "AttributeIntelligenceGain"     "1" // 120 mp
+        "MovementSpeed"     "300"
+        "VisionDaytimeRange"        "550"
+        "VisionNighttimeRange"      "450"
+    }
+
+    "npc_dota_hero_juggernaut"
+    {
+        "override_hero"             "npc_dota_hero_juggernaut"
+        "AttackDamageMin"       "30"
+        "AttackDamageMax"       "30"
+        "AttackRate"        "2"
+        "ArmorPhysical"     "0"
+        "MagicalResistance"       "0"
+        "StatusHealth"              "90"
         "StatusHealthRegen"         "0"
         "StatusMana"                "100"
         "StatusManaRegen"           "0.0"
@@ -37,23 +114,23 @@
         "Ability17"     ""
         "AttributePrimary"      "DOTA_ATTRIBUTE_STRENGTH"
         "AttributeBaseStrength"     "0"
-        "AttributeStrengthGain"     "3"
+        "AttributeStrengthGain"     "2.5" // 500 hp
         "AttributeBaseAgility"      "0"
-        "AttributeAgilityGain"      "1.5"
+        "AttributeAgilityGain"      "0"
         "AttributeBaseIntelligence"     "0"
-        "AttributeIntelligenceGain"     "1"
+        "AttributeIntelligenceGain"     "1" // 120 mp
         "MovementSpeed"     "300"
         "VisionDaytimeRange"        "550"
         "VisionNighttimeRange"      "450"
     }
 
-    "npc_dota_hero_windrunner" // archer
+    "npc_dota_hero_windrunner"
     {
         "override_hero"             "npc_dota_hero_windrunner"            // Hero to override
         "AttackDamageMin"       "30"
         "AttackDamageMax"       "30"
         "AttackRate"        "2"
-        "ArmorPhysical"     "-2"
+        "ArmorPhysical"     "0"
         "MagicalResistance"       "0"
         "StatusHealth"              "80"
         "StatusHealthRegen"         "0"
@@ -76,17 +153,17 @@
         "Ability17"     ""
         "AttributePrimary"      "DOTA_ATTRIBUTE_STRENGTH"
         "AttributeBaseStrength"     "0"
-        "AttributeStrengthGain"     "2.33"
+        "AttributeStrengthGain"     "1.75" // 10 niveis = 350 hp
         "AttributeBaseAgility"      "0"
-        "AttributeAgilityGain"      "3"
+        "AttributeAgilityGain"      "0"
         "AttributeBaseIntelligence"     "0"
-        "AttributeIntelligenceGain"     "1"
+        "AttributeIntelligenceGain"     "1" // 120 mp
         "MovementSpeed"     "300"
         "VisionDaytimeRange"        "550"
         "VisionNighttimeRange"      "450"
     }
 
-    "npc_dota_hero_lina" // fire mage
+    "npc_dota_hero_lina"
     {
         "override_hero"             "npc_dota_hero_lina"            // Hero to override
         "AttackDamageMin"       "25"
@@ -115,11 +192,11 @@
         "Ability17"     ""
         "AttributePrimary"      "DOTA_ATTRIBUTE_STRENGTH"
         "AttributeBaseStrength"     "0"
-        "AttributeStrengthGain"     "2"
+        "AttributeStrengthGain"     "1.5" // 300 hp
         "AttributeBaseAgility"      "0"
-        "AttributeAgilityGain"      "1"
+        "AttributeAgilityGain"      "0"
         "AttributeBaseIntelligence"     "0"
-        "AttributeIntelligenceGain"     "2"
+        "AttributeIntelligenceGain"     "2" // 240 mp
         "MovementSpeed"     "300"
         "VisionDaytimeRange"        "550"
         "VisionNighttimeRange"      "450"

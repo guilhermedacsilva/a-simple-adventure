@@ -3,12 +3,22 @@ local hPlayer = PlayerResource:GetPlayer(0)
 local heroItems = {}
 local heroAbilities = {}
 
-local hero = CreateHeroForPlayer("npc_dota_hero_mars", hPlayer)
+local hero = 0
+hero = CreateHeroForPlayer("npc_dota_hero_dragon_knight", hPlayer)
 HEROES["0"] = hero
-heroAbilities["0"] = {0,3,3}
+heroAbilities["0"] = {0,1,0}
 heroItems["0"] = {
     { ["name"] = "item_wood_shield_datadriven", ["cost"] = 100}
 }
+
+--[[
+hero = CreateHeroForPlayer("npc_dota_hero_mars", hPlayer)
+HEROES["0"] = hero
+heroAbilities["0"] = {0,3,0}
+heroItems["0"] = {
+    { ["name"] = "item_wood_shield_datadriven", ["cost"] = 100}
+}
+]]--
 
 hero = CreateHeroForPlayer("npc_dota_hero_windrunner", hPlayer)
 HEROES["1"] = hero
